@@ -1,0 +1,960 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     40293,        952]
+NotebookOptionsPosition[     39473,        921]
+NotebookOutlinePosition[     39816,        936]
+CellTagsIndexPosition[     39773,        933]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+This script is a part of ANGEL project.
+V 1.3
+2017.10.01
+(C) Vulpes Corsac\
+\>", "Text",
+ CellChangeTimes->{{3.698631723375579*^9, 3.698631756693108*^9}, {
+  3.7077249871839614`*^9, 3.707724987399116*^9}, {3.715512434216916*^9, 
+  3.7155124342669506`*^9}, {3.715844788124086*^9, 3.7158447924731607`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Variables", " ", "clearing"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{3.698387665880822*^9}],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{"FILE", " ", "NAMES", " ", "SHOULD", " ", "BE", " ", 
+    RowBox[{"e", ".", "g", ".", " ", "\"\<T=20,3.dat\>\""}]}], " ", "||", 
+   " ", "\"\<T=20.dat\>\""}], " ", "*)"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"paraboloid", "[", 
+     RowBox[{"y0_", ",", "A_", ",", "\[Mu]_", ",", "x_"}], "]"}], " ", ":=", 
+    " ", 
+    RowBox[{"y0", " ", "+", " ", 
+     RowBox[{"A", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"x", "-", "\[Mu]"}], ")"}], "2"]}]}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Paraboloid", " ", "fitting", " ", "function"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"linear", "[", 
+     RowBox[{"A_", ",", "B_", ",", "x_"}], "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{"A", " ", "x"}], "+", "B"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Linear", " ", "fitting", " ", "function"}], " ", 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.68777355187722*^9, 3.6877736015032725`*^9}, 
+   3.687876932513*^9, {3.6983876013921804`*^9, 3.6983876027711067`*^9}, {
+   3.6983877497329063`*^9, 3.6983877684971595`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"phaseColumnName", "=", "\"\<Theta\>\""}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Name", " ", "of", " ", "column", " ", "in", " ", "data", " ", "file", " ",
+     "with", " ", "phase"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"frequencyColumnName", "=", "\"\<Fext\>\""}], ";", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Name", " ", "of", " ", "column", " ", "in", " ", "data", " ", "file", " ",
+     "with", " ", "frequency"}], " ", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.7155127963189726`*^9, 3.7155128231242514`*^9}, {
+  3.7155128731234035`*^9, 3.7155129155979605`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"parabolicPart", "=", "2"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Part", " ", "of", " ", "data", " ", 
+    RowBox[{"(", 
+     RowBox[{"from", " ", "Min", " ", "to", " ", 
+      FractionBox[
+       RowBox[{"Max", "-", "Min", " "}], "part"]}], ")"}], " ", "selection"}],
+    " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7155124216449575`*^9, 3.715512430411948*^9}, {
+  3.715512462511532*^9, 3.715512521670839*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"fileNames", " ", "=", " ", 
+    RowBox[{"FileNames", "[", 
+     RowBox[{"\"\<T=*.dat\>\"", ",", 
+      RowBox[{"NotebookDirectory", "[", "]"}]}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Getting", " ", "all", " ", "file", " ", "names", " ", "that", " ", 
+    "matches", " ", "template", " ", "in", " ", "current", " ", "directory"}],
+    " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"FresFromTemperature", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Getting", " ", "resonance", " ", "frequency", " ", "from", " ", "all", 
+      " ", "temperature", " ", "data"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"file", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"FileNameSplit", "[", 
+         RowBox[{"fileNames", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"-", "1"}], "]"}], "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Getting", " ", "current", " ", "filename"}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"split", "=", 
+       RowBox[{
+        RowBox[{"StringSplit", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"StringSplit", "[", 
+            RowBox[{"file", ",", "\"\<.\>\""}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<=\>\""}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"-", "1"}], "]"}], "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Getting", " ", "temperature"}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"split1", " ", "=", " ", 
+       RowBox[{"StringSplit", "[", 
+        RowBox[{"split", ",", "\"\<,\>\""}], "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Splitting", " ", "coma"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Temperature", " ", "=", " ", 
+       RowBox[{"Which", "[", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "If", " ", "there", " ", "is", " ", "coma", " ", "in", " ", "file", 
+          " ", "name"}], " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "split1", "]"}], "\[Equal]", "1"}], ",", 
+         RowBox[{"ToExpression", "[", 
+          RowBox[{"split1", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+         RowBox[{"(*", " ", 
+          RowBox[{"No", " ", "-", " ", "Ok"}], " ", "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Length", "[", "split1", "]"}], "\[Equal]", "2"}], ",", 
+         RowBox[{"ToExpression", "[", 
+          RowBox[{
+           RowBox[{"split1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "<>", "\"\<.\>\"", "<>", 
+           RowBox[{"split1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], 
+        RowBox[{"(*", " ", 
+         RowBox[{"Yes", " ", "-", " ", 
+          RowBox[{
+          "Merging", " ", "temperature", " ", "string", " ", "and", " ", 
+           "convert", " ", "to", " ", "floats"}]}], " ", "*)"}], 
+        "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"DataNames", "=", 
+       RowBox[{
+        RowBox[{"Import", "[", 
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", "]"}], "<>", "file"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Getting", " ", "data", " ", "header"}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"Data", "=", 
+       RowBox[{
+        RowBox[{"Import", "[", 
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", "]"}], "<>", "file"}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"2", ";;"}], "]"}], "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Getting", " ", "current", " ", "temperature", " ", "data"}], 
+       " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"RoundData", " ", "=", " ", 
+       RowBox[{"Transpose", "[", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Data", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", 
+             RowBox[{
+              RowBox[{"Position", "[", 
+               RowBox[{"DataNames", ",", "frequencyColumnName"}], "]"}], "[", 
+              RowBox[{"[", 
+               RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "]"}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Data", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", 
+             RowBox[{
+              RowBox[{"Position", "[", 
+               RowBox[{"DataNames", ",", "phaseColumnName"}], "]"}], "[", 
+              RowBox[{"[", 
+               RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "]"}], "]"}]}], "}"}],
+         "\[IndentingNewLine]", "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Cutting", " ", "away", " ", "all", " ", "unnesessary", " ", "data"}], 
+       " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"FresMin", "=", 
+       RowBox[{
+        RowBox[{"RoundData", "[", 
+         RowBox[{"[", 
+          RowBox[{
+           RowBox[{"Ordering", "[", 
+            RowBox[{
+             RowBox[{"RoundData", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", " ", "2"}], "]"}], "]"}], ",", "1"}], 
+            "]"}], ",", " ", "1"}], "]"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Getting", " ", "resonance", " ", "frequency", " ", "by", " ", 
+        "finding", " ", "minimum"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"PhaseMin", "=", 
+       RowBox[{"Min", "[", 
+        RowBox[{"RoundData", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Getting", " ", "phase", " ", "minimum"}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"PhaseMax", "=", 
+       RowBox[{"Max", "[", 
+        RowBox[{"RoundData", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Getting", " ", "phase", " ", "maximum"}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"RoundDataParaboloid", " ", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"RoundData", ",", 
+         RowBox[{
+          RowBox[{"PhaseMin", "\[LessEqual]", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "\[LessEqual]", 
+           RowBox[{"PhaseMin", "+", 
+            FractionBox[
+             RowBox[{"PhaseMax", "-", "PhaseMin"}], "parabolicPart"]}]}], 
+          "&"}]}], "]"}]}], " ", ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Cutting", " ", "data", " ", "only", " ", "around", " ", "phase", " ", 
+        "minimum"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"nlmRoundParaboloid", " ", "=", " ", 
+       RowBox[{"NonlinearModelFit", "[", 
+        RowBox[{"(*", " ", 
+         RowBox[{"Fitting", " ", "data", " ", "with", " ", "paraboloid"}], 
+         " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"RoundDataParaboloid", ",", 
+         RowBox[{"paraboloid", "[", 
+          RowBox[{"y0", ",", "A", ",", "\[Mu]", ",", "t"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"y0", ",", 
+             RowBox[{"Max", "[", 
+              RowBox[{"RoundDataParaboloid", "[", 
+               RowBox[{"[", 
+                RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"A", ",", 
+             RowBox[{
+              RowBox[{"RoundDataParaboloid", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"Ordering", "[", 
+                  RowBox[{
+                   RowBox[{"RoundDataParaboloid", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", " ", "2"}], "]"}], "]"}], ",", "1"}], 
+                  "]"}], ",", " ", "2"}], "]"}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"\[Mu]", ",", 
+             RowBox[{
+              RowBox[{"RoundDataParaboloid", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"Ordering", "[", 
+                  RowBox[{
+                   RowBox[{"RoundDataParaboloid", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", " ", "2"}], "]"}], "]"}], ",", "1"}], 
+                  "]"}], ",", " ", "1"}], "]"}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "}"}], ",", 
+         "\[IndentingNewLine]", "t"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"parametersTableRoundParaboloid", " ", "=", " ", 
+       RowBox[{"nlmRoundParaboloid", "[", "\"\<ParameterTable\>\"", "]"}]}], 
+      ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Getting", " ", "fitted", " ", "parameters"}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"FresParaboloid", " ", "=", " ", 
+       RowBox[{"parametersTableRoundParaboloid", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "4", ",", "2"}], "]"}], "]"}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Getting", " ", "resonance", " ", "frequency", " ", "from", " ", 
+        "fitting"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"\[CapitalDelta]FresParaboloid", " ", "=", " ", 
+       RowBox[{"100", "\[Times]", 
+        RowBox[{"Abs", "[", 
+         FractionBox[
+          RowBox[{"parametersTableRoundParaboloid", "[", 
+           RowBox[{"[", 
+            RowBox[{"1", ",", "1", ",", "4", ",", "3"}], "]"}], "]"}], 
+          RowBox[{"parametersTableRoundParaboloid", "[", 
+           RowBox[{"[", 
+            RowBox[{"1", ",", "1", ",", "4", ",", "2"}], "]"}], "]"}]], 
+         "]"}]}]}], ";", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Getting", " ", "resonance", " ", "frequency", " ", "deviation", " ", 
+        "from", " ", "fitting"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<T=\>\"", "<>", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{
+           RowBox[{"ToString", "[", "Temperature", "]"}], ",", 
+           RowBox[{"\"\<.\>\"", "\[Rule]", "\"\<,\>\""}]}], "]"}], "<>", 
+         "\"\<.png\>\""}], ",", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "Exporting", " ", "plot", " ", "with", " ", "data", " ", "and", " ", 
+          "fitting"}], " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"Show", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"ListPlot", "[", 
+           RowBox[{"RoundData", ",", 
+            RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+            RowBox[{"Joined", "->", "False"}], ",", 
+            RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+            RowBox[{"Filling", "->", "None"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"PlotLabel", "\[Rule]", 
+             RowBox[{"\"\<Phase fitting for T = \>\"", "<>", 
+              RowBox[{"ToString", "[", "Temperature", "]"}]}]}], ",", 
+            RowBox[{"AxesLabel", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"\"\<Frequency[Hz]\>\"", ",", "\"\<Phase[Deg]\>\""}], 
+              "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Plot", "[", 
+           RowBox[{
+            RowBox[{"paraboloid", "[", 
+             RowBox[{
+              RowBox[{"parametersTableRoundParaboloid", " ", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", "1", ",", "2", ",", "2"}], "]"}], "]"}], 
+              ",", 
+              RowBox[{"parametersTableRoundParaboloid", " ", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", "1", ",", "3", ",", "2"}], "]"}], "]"}], 
+              ",", 
+              RowBox[{"parametersTableRoundParaboloid", " ", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", "1", ",", "4", ",", "2"}], "]"}], "]"}], 
+              ",", "t"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"t", ",", 
+              RowBox[{"RoundDataParaboloid", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", 
+              RowBox[{"RoundDataParaboloid", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"-", "1"}], ",", "1"}], "]"}], "]"}]}], "}"}], ",", 
+            RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+            RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+            RowBox[{"ColorFunction", "\[Rule]", 
+             RowBox[{"Function", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"x", ",", "y"}], "}"}], ",", "Red"}], "]"}]}]}], 
+           "]"}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+       "Temperature", ",", "FresParaboloid", ",", "FresMin", ",", 
+        "\[CapitalDelta]FresParaboloid"}], "}"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "fileNames", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"FresFromTemperatureExport", " ", "=", " ", 
+     RowBox[{"Insert", "[", 
+      RowBox[{"FresFromTemperature", ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<T[C]\>\"", ",", "\"\<FresFit[Hz]\>\"", ",", 
+         "\"\<FresMin[Hz]\>\"", ",", "\"\<dFresFit[%]\>\""}], "}"}], ",", 
+       "1"}], "]"}]}], ")"}], "//", "TableForm"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Showing", " ", "everythin", " ", "in", " ", "a", " ", "table"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+      "\"\<FresFromTemperature.xlsx\>\""}], ",", 
+     "FresFromTemperatureExport"}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "data", " ", "from", " ", "above"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.68776779017855*^9, 3.6877678271050687`*^9}, {
+   3.687767910933819*^9, 3.687768110139257*^9}, {3.687768181986989*^9, 
+   3.6877682093837495`*^9}, {3.6877686040564795`*^9, 
+   3.6877686803074493`*^9}, {3.6877687706029873`*^9, 
+   3.6877687707280035`*^9}, {3.687768807272602*^9, 3.687768876866657*^9}, {
+   3.6877689781530695`*^9, 3.687769147062605*^9}, 3.6877692590538797`*^9, {
+   3.687769454549389*^9, 3.6877694615099134`*^9}, {3.6877695323849306`*^9, 
+   3.687769571666347*^9}, {3.687769603674632*^9, 3.687769608335451*^9}, {
+   3.6877696712960525`*^9, 3.687769675410961*^9}, 3.687770516903035*^9, {
+   3.6877706381320715`*^9, 3.687770638974123*^9}, 3.6877709363148804`*^9, {
+   3.687771723453436*^9, 3.68777175073866*^9}, {3.68777295228802*^9, 
+   3.6877729738808365`*^9}, {3.687773102193073*^9, 3.68777311800019*^9}, {
+   3.6877732102461967`*^9, 3.6877732209808736`*^9}, {3.6877738925395737`*^9, 
+   3.687773914544069*^9}, {3.6877740983902054`*^9, 3.687774137748739*^9}, {
+   3.6877762960949497`*^9, 3.6877763353578916`*^9}, {3.687776475243177*^9, 
+   3.6877764992243595`*^9}, {3.6877765322355003`*^9, 3.687776580666602*^9}, {
+   3.6877766893030167`*^9, 3.687776704794746*^9}, {3.6878761161515784`*^9, 
+   3.6878761412416353`*^9}, 3.687876196827662*^9, {3.6878762831934786`*^9, 
+   3.6878763274407225`*^9}, {3.687876516565091*^9, 3.687876553736621*^9}, {
+   3.6878769227477555`*^9, 3.687876922872757*^9}, {3.6878769556040287`*^9, 
+   3.687876956103302*^9}, {3.6879253149997206`*^9, 3.6879253553519063`*^9}, {
+   3.6882008553952236`*^9, 3.688200855608677*^9}, {3.698387313226822*^9, 
+   3.6983873376013374`*^9}, {3.6983873845284586`*^9, 
+   3.6983873993251762`*^9}, {3.698387453527025*^9, 3.698387460347649*^9}, {
+   3.698387772168743*^9, 3.6983878202076855`*^9}, {3.6983880731350174`*^9, 
+   3.698388098058633*^9}, {3.6983883639841776`*^9, 3.6983884970381947`*^9}, {
+   3.698388698596057*^9, 3.6983887333035717`*^9}, {3.698388770981991*^9, 
+   3.6983888283425093`*^9}, {3.6983888619152117`*^9, 3.698388873054079*^9}, {
+   3.6983889205529995`*^9, 3.6983889984580183`*^9}, {3.6983890378738594`*^9, 
+   3.698389120496072*^9}, {3.6983892804550657`*^9, 3.698389289409391*^9}, {
+   3.69838932355252*^9, 3.6983893918047295`*^9}, {3.698389435943907*^9, 
+   3.6983894757938957`*^9}, {3.6983895226529837`*^9, 3.698389568964707*^9}, {
+   3.6983903966487365`*^9, 3.698390447339531*^9}, {3.700318801400262*^9, 
+   3.700318810698717*^9}, 3.7155124783972273`*^9, {3.715512746157915*^9, 
+   3.715512788396387*^9}, {3.7155128372392893`*^9, 3.7155128530988684`*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"T[C]\"\>", "\<\"FresFit[Hz]\"\>", "\<\"FresMin[Hz]\"\>", \
+"\<\"dFresFit[%]\"\>"},
+    {"20.47`", 
+     "580417.56004060737589314053885296362255705686`20.20787393062086", 
+     "580419.`20.763741620616315", 
+     "0.00006802987885564862066105785738557961`13.271158730729091"},
+    {"22.5`", 
+     "580372.85366739425117642888267790195591312948`20.107179432243516", 
+     "580370.`20.763704955159238", 
+     "0.00005104371008104492801828067229667252`13.334731234551827"},
+    {"25.1`", 
+     "580295.38808930465415632995957022440784030902`20.088128998120517", 
+     "580294.`20.76364808016239", 
+     "0.00005922559091183324509258213498744859`13.506344489520874"},
+    {"28.4`", 
+     "580183.01140012393866701997149725717727413918`20.01628520767123", 
+     "580187.`20.763567993526426", 
+     "0.00006108862212251815266760338677794402`11.40611708072593"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.715512879111763*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"KprtData", "=", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"FresFromTemperature", "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"FresFromTemperature", "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "}"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Forming", " ", "data", " ", "for", " ", "later", " ", "fitting"}],
+    " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Which", "[", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Looking", " ", "how", " ", "many", " ", "points", " ", "we", " ", 
+     "have"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Length", "[", 
+      RowBox[{"FresFromTemperature", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], "\[Equal]", "1"}], 
+    ",", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"1", " ", "point"}], " ", "-", " ", 
+      RowBox[{"nothing", " ", "we", " ", "can", " ", "tell"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Kprt", "=", 
+      RowBox[{"\[Delta]Kprt", "=", 
+       RowBox[{"F0", "=", 
+        RowBox[{"\[Delta]F0", "=", "Infinity"}]}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Length", "[", 
+       RowBox[{"FresFromTemperature", "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], "\[Equal]", "2"}]}], 
+    ",", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"2", " ", "points"}], " ", "-", " ", 
+      RowBox[{"no", " ", "error"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Kprt", "=", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"KprtData", "[", 
+         RowBox[{"[", 
+          RowBox[{"2", ",", "2"}], "]"}], "]"}], "-", 
+        RowBox[{"KprtData", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "2"}], "]"}], "]"}]}], 
+       RowBox[{
+        RowBox[{"KprtData", "[", 
+         RowBox[{"[", 
+          RowBox[{"2", ",", "1"}], "]"}], "]"}], "-", 
+        RowBox[{"KprtData", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "1"}], "]"}], "]"}]}]]}], ";", 
+     RowBox[{"\[Delta]Kprt", "=", "0"}], ";", 
+     RowBox[{"F0", "=", 
+      RowBox[{"KprtData", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]F0", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Length", "[", 
+       RowBox[{"FresFromTemperature", "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], "\[GreaterEqual]", 
+      "3"}]}], ",", 
+    RowBox[{"(*", " ", 
+     RowBox[{"3", " ", "or", " ", "more", " ", "points"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"KprtFit", " ", "=", " ", 
+      RowBox[{"NonlinearModelFit", "[", 
+       RowBox[{"KprtData", ",", 
+        RowBox[{"linear", "[", 
+         RowBox[{"A", ",", "B", ",", "x"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"A", ",", "1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"B", ",", "1"}], "}"}]}], "}"}], ",", "x"}], "]"}]}], ";", 
+     RowBox[{"(*", " ", "Fitting", " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"parametricTableKprtFit", " ", "=", " ", 
+      RowBox[{"KprtFit", "[", "\"\<ParameterTable\>\"", "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"Getting", " ", "fitting", " ", "parameters", " ", "table"}], 
+       ",", " ", 
+       RowBox[{
+       "and", " ", "coefficients", " ", "and", " ", "their", " ", 
+        "errors"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Kprt", "=", 
+      RowBox[{"parametricTableKprtFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "2", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]Kprt", "=", 
+      RowBox[{"Abs", "[", 
+       RowBox[{"parametricTableKprtFit", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "2", ",", "3"}], "]"}], "]"}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"F0", "=", 
+      RowBox[{"parametricTableKprtFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "3", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]F0", "=", 
+      RowBox[{"Abs", "[", 
+       RowBox[{"parametricTableKprtFit", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1", ",", "3", ",", "3"}], "]"}], "]"}], "]"}]}], 
+     ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.6877703179002604`*^9, 3.687770437776207*^9, 3.687773737821179*^9, {
+   3.6877737756943274`*^9, 3.6877738033605027`*^9}, {3.687773983231253*^9, 
+   3.6877739917682915`*^9}, {3.687776824265997*^9, 3.6877768244631357`*^9}, {
+   3.687789308674959*^9, 3.6877893960358505`*^9}, {3.6877895489547615`*^9, 
+   3.6877895507648587`*^9}, {3.6983878404330215`*^9, 3.698387858686914*^9}, {
+   3.698387892878066*^9, 3.6983878941499643`*^9}, {3.6983896602792006`*^9, 
+   3.698389677827607*^9}, {3.698389711712541*^9, 3.6983898077873945`*^9}, {
+   3.698389990927273*^9, 3.69839003661563*^9}, {3.6983900710049314`*^9, 
+   3.698390096986273*^9}, {3.6983901359177723`*^9, 3.6983902154782324`*^9}, {
+   3.698390258482609*^9, 3.698390260224839*^9}, {3.698632608809169*^9, 
+   3.69863261092784*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"plotFresFromTemperature", " ", "=", " ", "\[IndentingNewLine]", 
+  RowBox[{"Show", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", 
+     RowBox[{
+      RowBox[{"Evaluate", "[", 
+       RowBox[{"{", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "Plotting", " ", "Min", " ", "and", " ", "Fit", " ", "Fres"}], " ", 
+         "*)"}], "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Transpose", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"FresFromTemperature", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"FresFromTemperature", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "3"}], "]"}], "]"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Transpose", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"FresFromTemperature", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"FresFromTemperature", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "}"}], "]"}]}], 
+        "\[IndentingNewLine]", "}"}], "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+      RowBox[{"Joined", "->", "False"}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+      RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+      RowBox[{
+      "PlotLabel", "\[Rule]", "\"\<Fresonance temperature dependency\>\""}], 
+      ",", 
+      RowBox[{"AxesLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Temperature[C]\>\"", ",", "\"\<Fresonance[Hz]\>\""}], 
+        "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"F0", "+", 
+       RowBox[{"Kprt", " ", "frequency"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"frequency", ",", 
+        RowBox[{"Min", "[", 
+         RowBox[{"FresFromTemperature", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], ",", 
+        RowBox[{"Max", "[", 
+         RowBox[{"FresFromTemperature", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+      RowBox[{"ColorFunction", "\[Rule]", 
+       RowBox[{"Function", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x", ",", "y"}], "}"}], ",", "Red"}], "]"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+      "\"\<FresFromTemperature.png\>\""}], ",", "plotFresFromTemperature"}], 
+    "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "plot", " ", "from", " ", "above"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.687769575487048*^9, 3.687769575946816*^9}, {
+   3.6877696146495423`*^9, 3.6877696416534977`*^9}, {3.6877696796917014`*^9, 
+   3.6877697041307983`*^9}, 3.687769757892004*^9, 3.6877705155761595`*^9, {
+   3.6877734707814093`*^9, 3.6877735144369316`*^9}, {3.6877738720057*^9, 
+   3.68777387671565*^9}, {3.687776600611704*^9, 3.6877766381810803`*^9}, {
+   3.687776781976118*^9, 3.6877767836748433`*^9}, 3.6983873463159847`*^9, 
+   3.698387460378888*^9, {3.698387827008478*^9, 3.698387832342246*^9}, {
+   3.69838918635259*^9, 3.6983892031424494`*^9}, {3.6983895189333563`*^9, 
+   3.698389546485818*^9}, {3.698389592663436*^9, 3.698389611497739*^9}, {
+   3.698390323031203*^9, 3.69839037285892*^9}, {3.7003188300796003`*^9, 
+   3.7003188327069387`*^9}, {3.70031887395357*^9, 3.700318947135375*^9}, {
+   3.700318994293226*^9, 3.7003190738498225`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGCQAGIQvUOu9XVghYkDkMnQtk3REUQzNJiB+SpA/qyZQCBp
+Ceb3bFV0TAMDGzB/2xZFR5j+qiV75ZqR9Hc8Ed6qiaRff8nmY31I+tfbXGNd
+h6Q/KLI9Z9oWhH4YH6Yfxofph/GppX+g/A8A1lCHJg==
+     "], {{{}, {}, {}, {}, {}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], Opacity[0.3], 
+        LineBox[{13, 1}], LineBox[{14, 2}], LineBox[{15, 3}], 
+        LineBox[{16, 4}]}, {}, 
+       {RGBColor[0.880722, 0.611041, 0.142051], Opacity[0.3], LineBox[{9, 5}],
+         LineBox[{10, 6}], LineBox[{11, 7}], LineBox[{12, 8}]}}, {{}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+        0.012833333333333334`], AbsoluteThickness[1.6], 
+        PointBox[{17, 18, 19, 20}]}, 
+       {RGBColor[0.880722, 0.611041, 0.142051], PointSize[
+        0.012833333333333334`], AbsoluteThickness[1.6], 
+        PointBox[{21, 22, 23, 24}]}, {}}}], {}, {}, {{}, {}}}, {
+    GraphicsComplexBox[CompressedData["
+1:eJwV1HtQVGUYBnCQTIiQFIY1GGQBGY0YQjl7/4wXREKMyy4XCYjLiiRIBFIg
+XhYSdbzAwibGZTNRgnUSJBFQuQruIhAXQdFlBZk1hGKNEIjbpPaeP86c+c1z
+vuf75p1zjq34G9G+VXp6er540XcGRaaFhyjYkGXtV1Bv696R9uiVYykF4qJy
+/XPovxo/M4j8nQJXz9mXWWhdoRWndo4C//od2enoq859T92sWNA9OuydhB6+
+Hy518GJBbxHlFUuvX9y11zmJBVaWBdNh6K8dzbxkxSyYcb7dF4CuYjQWf6Rk
+waZl5jMvdI/8nukLHQt+OSMt2o6OslOcX7Fgw7Wqu2dd0QNuOp6rGxteFy5u
+dkS/YawVXo5jQzUndZ6JvjRrnBYvY8Nkws0lC7RNbEJz0B02JMYuKUzQ5uqy
+9SXjbEh/pZ9ngFa+26Q2N+WA1jWgfLnO1j2wh2qrYXOgkJTFzaBDCk7f+jWG
+A4/UDVETaO4ceaA6w4EIwRODUbQ0qGeBX8eBA1tvjw2iS5P50hdjHNCMjE51
+omX2Rt4313ChwM/wcit6QV1j+nQbF4YCF6V1aL5D87JDOBfENrrNlWieU0VQ
+xXEu+JXaz1xBV7ISmrOquNBWy5wpQr8ZknpLhriQmWcnz0MrD0m1Q3o8UL3+
+89hJtNfjRJ34Yx4k2M7nHUEruq8xzAJ5EGb8ju9B9NE2ldBawoOB02r3/WgX
+f7juU8GDgp4b2kj0pcLiI1W9PKhX9f8WjD7+vDckYYkHUaKaW7vRnkpxkA+T
+D4HlxfEe6MNXB6NO7OZD/7mdgVx0nn1ZrjaVDz9yFyad0dFfiJy+lfOhqUR3
+zQFdLhtRR3fwIT6/XGGF7oq+r0ie5oP481i/9eiYbbknNB8K4Ll80skQXduy
+dTDDUwBtpdX8N7W27hNatgdJFMDLA0fn5tE5axh3QwsFcLHbZHwKvU65J7qo
+VQAl/5RlatEiQXqKyaQAFrskPmr0mrqU/JF1BDScjb59aLmqZ6CPR8AosX1F
+SefC6r1xcQSY/43+0IBOCjZM/jSHgu05WkUevi9C45YSywAC5tSDjlbM2z3t
+PvE+ToHjqbcrMszT9u+sn/ckYBrQFd2OudN1diaEE7Dc8MSpGZ1Iqtf6HqPA
+Nlu66Tw+b8gwUsa4EXj/marqHuYtESs5VcEEGBUPM1rQJW8PpjyMJmB9VjPW
+iPa4/Z2k/zAFF/VD7tDrRdNTPkWEwHsOnkH0+Q2pEbNxEQGLv4VM+nx/PA5a
+MookYDUQeqoJHbBFNvXTXgIbd0Tw6D6nhdD6/AwKNHfvGNDf/8JwuNRVQOCs
+d7aC7qu08d2TKSRw4QNZKt13ul0lKI8gIJ8vHKb7/jVb5cwVE/g5Tp5D91US
+pkJ/H4FLNtYT9PzsLviIXuH/JaNUt4Xu7/Q3d/meT2CXxm6A7pdcWL3cg/MM
+vuJyke4P40pGZ3FeYac4BvS8Os809J+MIfDlEr+e7pfUqL39YwlE3Wgypa3p
++Gp1Le43lnusid7vf6DjKoY=
+     "], {{}, {}, 
+      {RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[1.6], 
+       Opacity[1.], 
+       LineBox[{1, 71, 65, 60, 56, 53, 51, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+         13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 
+        30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 
+        47, 48, 49, 72, 66, 61, 57, 54, 52, 73, 67, 62, 58, 55, 74, 68, 63, 
+        59, 75, 69, 64, 76, 70, 77, 50},
+        VertexColors->Automatic]}},
+     VertexColors->CompressedData["
+1:eJxTTMoPSmViYGDwBWJmBhj4YM+AFYyKj4qPio+Kj4qPio+KIwMAhJZdHw==
+
+      "]], {}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{
+    FormBox["\"Temperature[C]\"", TraditionalForm], 
+    FormBox["\"Fresonance[Hz]\"", TraditionalForm]},
+  AxesOrigin->{20.346093749999998`, 580171.2119701302},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  ImageSize->Large,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotLabel->FormBox["\"Fresonance temperature dependency\"", TraditionalForm],
+  PlotRange->{{20.47, 28.4}, {580183.0114001239, 580419.}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.6983891261760836`*^9, 3.698389485040416*^9, {3.698389606277051*^9, 
+   3.6983896126175303`*^9}, 3.6983898224062333`*^9, 3.6983898692503157`*^9, {
+   3.6983902445087442`*^9, 3.698390271639902*^9}, 3.698390331885456*^9, {
+   3.698390365128461*^9, 3.698390373334256*^9}, 3.7003190414428596`*^9, {
+   3.700319074318565*^9, 3.7003190930841713`*^9}, 3.700319433626264*^9, 
+   3.7155125365897713`*^9, 3.7155128826882906`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"KprtString", " ", "=", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Getting", " ", "string", " ", "with", " ", "all", " ", "parameters", " ", 
+    "for", " ", "later", " ", "export"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"\"\<Kprt[Hz/K] = \>\"", "<>", 
+   RowBox[{"ToString", "[", "Kprt", "]"}], "<>", "\"\< \[PlusMinus] \>\"", "<>", 
+   RowBox[{"ToString", "[", "\[Delta]Kprt", "]"}], "<>", "\"\<, t.m. \>\"", "<>",
+    " ", 
+   RowBox[{"ToString", "[", 
+    RowBox[{"100", "\[Times]", 
+     RowBox[{"Abs", "[", 
+      FractionBox["\[Delta]Kprt", "Kprt"], "]"}]}], "]"}], " ", "<>", 
+   "\"\< %\>\"", "<>", "\"\<\\n\>\"", "<>", "\[IndentingNewLine]", 
+   "\"\<F0[kHz] = \>\"", "<>", 
+   RowBox[{"ToString", "[", 
+    RowBox[{"0.001", "\[Times]", "F0"}], "]"}], "<>", 
+   "\"\< \[PlusMinus] \>\"", "<>", 
+   RowBox[{"ToString", "[", "\[Delta]F0", "]"}], "<>", "\"\<, t.m. \>\"", "<>",
+    " ", 
+   RowBox[{"ToString", "[", 
+    RowBox[{"100", "\[Times]", 
+     RowBox[{"Abs", "[", 
+      FractionBox["\[Delta]F0", "F0"], "]"}]}], "]"}], " ", "<>", 
+   "\"\< %\>\"", "<>", "\"\<\\n\>\"", "<>", "\[IndentingNewLine]", 
+   "\"\<F[Hz] = \>\"", "<>", 
+   RowBox[{"ToString", "[", "Kprt", "]"}], "<>", "\"\<*T[C] + 10^3*\>\"", "<>", 
+   RowBox[{"ToString", "[", 
+    RowBox[{"0.001", "\[Times]", "F0"}], "]"}], "<>", "\"\<\\n\>\"", "<>", 
+   "\[IndentingNewLine]", "\"\<T[C] = \>\"", "<>", 
+   RowBox[{"ToString", "[", 
+    FractionBox["1", "Kprt"], "]"}], "<>", "\"\<*F[Hz]+\>\"", "<>", 
+   RowBox[{"ToString", "[", 
+    RowBox[{"-", 
+     FractionBox["F0", "Kprt"]}], "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<Kprt.txt\>\""}], 
+     ",", "KprtString"}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "string", " ", "from", " ", "above"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6877701210023327`*^9, 3.687770204068372*^9}, 
+   3.68777026925947*^9, {3.687773537631612*^9, 3.6877735399670725`*^9}, {
+   3.6877739397439966`*^9, 3.6877739744405966`*^9}, {3.687774006937815*^9, 
+   3.68777406215547*^9}, {3.6877769101682386`*^9, 3.687776965785304*^9}, {
+   3.687789415342275*^9, 3.687789508760723*^9}, {3.687789552888915*^9, 
+   3.6877895650078306`*^9}, {3.6877896044696274`*^9, 
+   3.6877897451802936`*^9}, {3.6877898097678947`*^9, 3.687789844991165*^9}, 
+   3.698387354509117*^9, 3.6983874603945246`*^9, {3.6983878996768785`*^9, 
+   3.6983879041370287`*^9}, {3.698389620954419*^9, 3.6983896506944413`*^9}, {
+   3.698389891502033*^9, 3.698389936584887*^9}, {3.700318611201939*^9, 
+   3.7003186188746166`*^9}, {3.7003194079865355`*^9, 3.700319419726346*^9}}],
+
+Cell[BoxData["\<\"Kprt[Hz/K] = -29.8696 \[PlusMinus] 1.78216, t.m. 5.96647 \
+%\\nF0[kHz] = 581.038 \[PlusMinus] 43.3054, t.m. 0.00745312 %\\nF[Hz] = \
+-29.8696*T[C] + 10^3*581.038\\nT[C] = -0.0334789*F[Hz]+19452.5\"\>"], "Output",
+ CellChangeTimes->{
+  3.6877898454130273`*^9, 3.6878769700255995`*^9, 3.687925383351393*^9, 
+   3.6983873799107428`*^9, 3.698387419782797*^9, {3.698387464092732*^9, 
+   3.698387484122946*^9}, 3.6983876303422318`*^9, 3.6983891263482056`*^9, 
+   3.6983896526818347`*^9, 3.6983898226403923`*^9, 3.698389869429442*^9, 
+   3.6983899371792974`*^9, 3.6983900455069103`*^9, 3.6983901792934113`*^9, {
+   3.698390217099377*^9, 3.6983902719571266`*^9}, 3.6983903321146193`*^9, 
+   3.7003190932247972`*^9, 3.700319433839405*^9, 3.7155125367578907`*^9, 
+   3.715512882835395*^9}]
+}, Open  ]]
+},
+WindowSize->{1366, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 314, 8, 87, "Text"],
+Cell[875, 30, 226, 6, 47, "Input"],
+Cell[1104, 38, 238, 5, 30, "Input"],
+Cell[1345, 45, 947, 27, 50, "Input"],
+Cell[2295, 74, 650, 15, 50, "Input"],
+Cell[2948, 91, 465, 12, 41, "Input"],
+Cell[CellGroupData[{
+Cell[3438, 107, 16779, 374, 1394, "Input"],
+Cell[20220, 483, 1410, 33, 97, "Output"]
+}, Open  ]],
+Cell[21645, 519, 5368, 135, 440, "Input"],
+Cell[CellGroupData[{
+Cell[27038, 658, 3880, 88, 384, "Input"],
+Cell[30921, 748, 4933, 96, 345, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35891, 849, 2766, 56, 295, "Input"],
+Cell[38660, 907, 797, 11, 88, "Output"]
+}, Open  ]]
+}
+]
+*)
+

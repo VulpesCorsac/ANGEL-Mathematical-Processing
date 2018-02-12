@@ -1,0 +1,160 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5344,        152]
+NotebookOptionsPosition[      4916,        134]
+NotebookOutlinePosition[      5258,        149]
+CellTagsIndexPosition[      5215,        146]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+This script is a part of ANGEL project.
+V 1.0
+2017.10.01
+(C) Vulpes Corsac\
+\>", "Text",
+ CellChangeTimes->{{3.698631723375579*^9, 3.698631756693108*^9}, {
+  3.7077250616095114`*^9, 3.707725064282384*^9}, {3.7158437912966137`*^9, 
+  3.7158437935672755`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Variables", " ", "clearing"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{3.698387665880822*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"importDir", "=", "\"\<Data\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Import", " ", "Directory"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"importFileMask", "=", "\"\<1_Round*.png\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Mask", " ", "for", " ", "import", " ", "files"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"importFilePrefix", "=", "\"\<1_Round\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Mask", " ", "for", " ", "import", " ", "files"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.69915891958205*^9, 3.699158941833767*^9}, {
+  3.6991590909422617`*^9, 3.699159100014777*^9}, {3.699159145768808*^9, 
+  3.6991591486877604`*^9}, {3.6991615319526415`*^9, 3.699161532093268*^9}, {
+  3.700217210826653*^9, 3.700217210833658*^9}, {3.7002209143747997`*^9, 
+  3.7002209246293664`*^9}, {3.700220961262295*^9, 3.700220993521859*^9}, {
+  3.7158439101693077`*^9, 3.7158439801876335`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"files", " ", "=", " ", 
+   RowBox[{"Length", "[", 
+    RowBox[{"FileNames", "[", 
+     RowBox[{"importFileMask", " ", ",", " ", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "importDir"}], 
+        "}"}], "]"}]}], "]"}], "]"}]}], ";", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Getting", " ", "files", " ", "ammount"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.699158962572616*^9, 3.6991589734774694`*^9}, {
+   3.6991590264513984`*^9, 3.6991590562613106`*^9}, {3.699159119370649*^9, 
+   3.6991591508247023`*^9}, {3.6991610204382043`*^9, 3.6991610288703585`*^9}, 
+   3.700220925984825*^9, 3.7002209662655983`*^9, {3.700220999667689*^9, 
+   3.700221009633035*^9}, 3.7158439703565955`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"plots", "=", 
+   RowBox[{"Monitor", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"NotebookDirectory", "[", "]"}], ",", "importDir", ",", 
+           RowBox[{"importFilePrefix", "<>", 
+            RowBox[{"ToString", "[", "i", "]"}], "<>", "\"\<.png\>\""}]}], 
+          "}"}], "]"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "files"}], "}"}]}], "]"}], ",", 
+     RowBox[{
+      RowBox[{"ToString", "[", 
+       RowBox[{
+        RowBox[{"Round", "[", 
+         FractionBox[
+          RowBox[{"1000", " ", "i"}], "files"], "]"}], "\[Times]", "0.1"}], 
+       "]"}], "<>", "\"\<%\>\""}]}], "]"}]}], ";", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Importing", " ", "all", " ", "files", " ", "to", " ", "a", " ", "table", 
+    " ", "for", " ", "future", " ", "export", " ", "into", " ", "gif"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.6991608248826094`*^9, 3.6991608583918076`*^9}, {
+   3.69916115088964*^9, 3.699161159127906*^9}, {3.6991612303452587`*^9, 
+   3.6991613055840793`*^9}, 3.7002209275473394`*^9, {3.7002210133166685`*^9, 
+   3.7002210335252776`*^9}, {3.715843985504904*^9, 3.7158440065985794`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+        RowBox[{"importFilePrefix", "<>", "\"\<.gif\>\""}]}], "}"}], "]"}], 
+     ",", "plots"}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "all", " ", "files", " ", "into", " ", "GIF"}], 
+   " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.6991613286115727`*^9, 3.6991613304505243`*^9}, {
+   3.6991613944807158`*^9, 3.699161458464979*^9}, 3.6991615716441493`*^9, {
+   3.7002209293016233`*^9, 3.7002209530594597`*^9}, 3.7158439874552937`*^9}]
+},
+WindowSize->{1028, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 268, 8, 87, "Text"],
+Cell[829, 30, 226, 6, 47, "Input"],
+Cell[1058, 38, 1047, 23, 88, "Input"],
+Cell[2108, 63, 808, 17, 68, "Input"],
+Cell[2919, 82, 1325, 32, 133, "Input"],
+Cell[4247, 116, 665, 16, 68, "Input"]
+}
+]
+*)
+

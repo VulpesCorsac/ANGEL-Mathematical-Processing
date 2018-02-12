@@ -1,0 +1,1211 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     48289,       1203]
+NotebookOptionsPosition[     47454,       1173]
+NotebookOutlinePosition[     47797,       1188]
+CellTagsIndexPosition[     47754,       1185]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+This script is a part of ANGEL project.
+V 1.0
+2017
+(C) Vulpes Corsac\
+\>", "Text",
+ CellChangeTimes->{{3.698631723375579*^9, 3.698631756693108*^9}, {
+  3.698632459765514*^9, 3.6986324635785203`*^9}, {3.6999661708749857`*^9, 
+  3.6999661714531193`*^9}, {3.7077251343717403`*^9, 3.7077251345828896`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Clearing", " ", "all", " ", "variables"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.6863952466113963`*^9, 3.6863952747216587`*^9}, {
+  3.6981327252035227`*^9, 3.6981327257537994`*^9}, {3.6985637247107983`*^9, 
+  3.698563732529333*^9}, {3.698565374961694*^9, 3.698565410084504*^9}, {
+  3.6985655174434385`*^9, 3.6985655178126993`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Kprt", "=", 
+    RowBox[{"-", "6."}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Kprt", " ", "for", " ", "current", " ", "resonance"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.6980780272850294`*^9, 3.6980780313716307`*^9}, 
+   3.6980780861467614`*^9, 3.6980781665336523`*^9, {3.6980782078736167`*^9, 
+   3.698078208325486*^9}, {3.6985637832931776`*^9, 3.698563797195015*^9}, {
+   3.69863128528267*^9, 3.6986312874233165`*^9}, {3.715336546917124*^9, 
+   3.7153365498762474`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"importDir", " ", "=", " ", "\"\<ImportData\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Directory", " ", "for", " ", "importing", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"exportDir", " ", "=", " ", "\"\<ExportData\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Directory", " ", "for", " ", "exporting", " ", "data"}], " ", 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.6985679656003838`*^9, 3.698568002445881*^9}, 
+   3.6985680545957165`*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"gaussian", "[", 
+     RowBox[{
+     "y0_", ",", "A_", ",", "\[Mu]_", ",", " ", "\[Sigma]_", ",", " ", "x_"}],
+      "]"}], " ", ":=", " ", 
+    RowBox[{"y0", " ", "+", " ", 
+     RowBox[{
+      FractionBox["A", 
+       RowBox[{"\[Sigma]", " ", 
+        SqrtBox[
+         FractionBox["\[Pi]", "2"]]}]], "\[Times]", 
+      RowBox[{"Exp", "[", 
+       FractionBox[
+        RowBox[{
+         RowBox[{"-", "2"}], 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"x", "-", "\[Mu]"}], ")"}], "2"]}], 
+        SuperscriptBox["\[Sigma]", "2"]], "]"}]}]}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Gauss", " ", "function"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"gaussianInverse", "[", 
+     RowBox[{
+     "y0_", ",", "A_", ",", "\[Mu]_", ",", " ", "\[Sigma]_", ",", "y_", ",", 
+      "sgn_"}], "]"}], " ", ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Sign", "[", "sgn", "]"}], "\[Times]", 
+      SqrtBox[
+       RowBox[{
+        RowBox[{"Log", "[", 
+         RowBox[{
+          FractionBox[
+           RowBox[{"(", 
+            RowBox[{"y", " ", "-", " ", "y0"}], ")"}], "A"], "\[Times]", 
+          "\[Sigma]", " ", 
+          SqrtBox[
+           FractionBox["\[Pi]", "2"]]}], "]"}], "\[Times]", 
+        FractionBox[
+         RowBox[{"-", 
+          SuperscriptBox["\[Sigma]", "2"]}], "2"]}]]}], "+", "\[Mu]"}]}], 
+   ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Inverse", " ", "Gauss", " ", "function"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"lorenz", "[", 
+     RowBox[{
+     "y0_", ",", "A_", ",", "\[Mu]_", ",", " ", "\[Sigma]_", ",", " ", "x_"}],
+      "]"}], ":=", 
+    RowBox[{"y0", " ", "+", " ", 
+     RowBox[{
+      FractionBox[
+       RowBox[{"2", "A"}], "\[Pi]"], "\[Times]", 
+      FractionBox["\[Sigma]", 
+       RowBox[{
+        RowBox[{"4", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"x", "-", "\[Mu]"}], ")"}], "2"]}], "+", 
+        SuperscriptBox["\[Sigma]", "2"]}]]}]}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Lorenz", " ", "function"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"lorenzInverse", "[", 
+     RowBox[{
+     "y0_", ",", "A_", ",", "\[Mu]_", ",", " ", "\[Sigma]_", ",", " ", "y_", 
+      ",", "sgn_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Sign", "[", "sgn", "]"}], "\[Times]", 
+      SqrtBox[
+       RowBox[{
+        FractionBox[
+         RowBox[{"2", " ", "A", " ", "\[Sigma]"}], 
+         RowBox[{"4", " ", "\[Pi]", " ", 
+          RowBox[{"(", 
+           RowBox[{"y", "-", "y0"}], ")"}]}]], "-", 
+        FractionBox[
+         SuperscriptBox["\[Sigma]", "2"], "4"]}]]}], "+", "\[Mu]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Inverse", " ", "Lorenz", " ", "function"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"paraboloid", "[", 
+     RowBox[{"y0_", ",", "A_", ",", "\[Mu]_", ",", "x_"}], "]"}], " ", ":=", 
+    " ", 
+    RowBox[{"y0", " ", "+", " ", 
+     RowBox[{"A", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"x", "-", "\[Mu]"}], ")"}], "2"]}]}]}], ";"}], 
+  RowBox[{
+  "(*", " ", "Paraboloid", " ", "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{
+  3.6877886792335563`*^9, {3.687788787501904*^9, 3.6877888269516344`*^9}, {
+   3.687788877445051*^9, 3.6877890381774607`*^9}, {3.687789132186021*^9, 
+   3.6877891824680076`*^9}, {3.6877892773584204`*^9, 
+   3.6877892832248025`*^9}, {3.6877899687059183`*^9, 3.687789994535322*^9}, 
+   3.6877908266557665`*^9, {3.6877908637327538`*^9, 3.687790966656809*^9}, {
+   3.6877910009823523`*^9, 3.6877910146161585`*^9}, {3.687856195067058*^9, 
+   3.687856210117498*^9}, {3.6878563221595716`*^9, 3.6878563312005258`*^9}, 
+   3.687856516454857*^9, {3.6980732379233627`*^9, 3.698073298039791*^9}, {
+   3.6980733975142403`*^9, 3.6980734453531275`*^9}, {3.698073596729477*^9, 
+   3.698073676742638*^9}, {3.698073711601201*^9, 3.6980737263502645`*^9}, {
+   3.698073795366977*^9, 3.698073795827388*^9}, {3.6980755291071577`*^9, 
+   3.698075535247254*^9}, {3.6980780240012555`*^9, 3.698078025360643*^9}, {
+   3.6985637346037965`*^9, 3.698563775513693*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Experiments", " ", "=", " ", 
+   RowBox[{"Length", "[", 
+    RowBox[{"FileNames", "[", 
+     RowBox[{"\"\<Prescan*.dat\>\"", ",", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir"}], 
+        "}"}], "]"}]}], "]"}], "]"}]}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Getting", " ", "experiments", " ", "ammount"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Preparing", " ", "tables", " ", "for", " ", "plotting", " ", "and", " ", 
+    "exporting"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"TemperatureLorenzKineticsPlot", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", "i", "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "Experiments"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TemperatureGaussKineticsPlot", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", "i", "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "Experiments"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TemperatureLorenzKineticsExport", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", "i", "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "Experiments"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TemperatureGaussKineticsExport", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", "i", "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "Experiments"}], "}"}]}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.698574018402648*^9, 3.6985740296836166`*^9}, {
+  3.69857407377276*^9, 3.698574075132719*^9}, {3.698574111718562*^9, 
+  3.698574114425474*^9}, {3.6985744313209767`*^9, 3.6985744490394926`*^9}, {
+  3.698574709924028*^9, 3.6985747898117795`*^9}, {3.698632486663339*^9, 
+  3.6986324948501635`*^9}, {3.715336562262868*^9, 3.7153365623329167`*^9}, {
+  3.715336636374069*^9, 3.715336645965765*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", " ", "Experiments"}], ",", 
+    RowBox[{"i", "=", 
+     RowBox[{"i", "+", "1"}]}], ",", 
+    RowBox[{"(*", " ", 
+     RowBox[{"For", " ", "all", " ", "experiments"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"PreScanData", "=", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir", 
+           ",", 
+           RowBox[{"\"\<PreScan*\>\"", "<>", 
+            RowBox[{"ToString", "[", "i", "]"}], "<>", "\"\<.dat\>\""}]}], 
+          "}"}], "]"}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"2", ";;"}], "]"}], "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Importing", " ", "rezonance", " ", "profile"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"PreScanFrequency", "=", 
+      RowBox[{"PreScanData", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Getting", " ", "frequency", " ", "column"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"PreScanTheta", "=", 
+      RowBox[{"PreScanData", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "6"}], "]"}], "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Getting", " ", "phase", " ", "column"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"PreScanData", "=", 
+      RowBox[{"Transpose", "[", 
+       RowBox[{"{", 
+        RowBox[{"PreScanFrequency", ",", "PreScanTheta"}], "}"}], "]"}]}], 
+     ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Forming", " ", "prescan", " ", "data"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"PreScanLorenzFit", "=", 
+      RowBox[{"NonlinearModelFit", "[", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "Fitting", " ", "prescan", " ", "data", " ", "with", " ", "lorenz"}], 
+        " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"PreScanData", ",", 
+        RowBox[{"lorenz", "[", 
+         RowBox[{
+         "y0", ",", "A", ",", "\[Mu]", ",", " ", "\[Sigma]", ",", "x"}], 
+         "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"y0", ",", 
+            RowBox[{"Max", "[", "PreScanTheta", "]"}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{
+             RowBox[{"Min", "[", "PreScanTheta", "]"}], "-", 
+             RowBox[{"Max", "[", "PreScanTheta", "]"}]}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"\[Mu]", ",", 
+            RowBox[{"PreScanFrequency", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"Position", "[", 
+                RowBox[{"PreScanTheta", ",", 
+                 RowBox[{"Min", "[", "PreScanTheta", "]"}]}], "]"}], "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", "1"}], "]"}], "]"}], "]"}], "]"}]}], "}"}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"\[Sigma]", ",", "10"}], "}"}]}], "}"}], ",", 
+        "\[IndentingNewLine]", "x"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"parametersTablePreScanLorenzFit", "=", 
+      RowBox[{"PreScanLorenzFit", "[", "\"\<ParameterTable\>\"", "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Getting", " ", "fited", " ", "parameters", " ", "and", " ", "their", 
+       " ", "errors"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"y0LorenzFit", "=", 
+      RowBox[{"parametersTablePreScanLorenzFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "2", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]y0LorenzFit", "=", 
+      RowBox[{"parametersTablePreScanLorenzFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "2", ",", "3"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"ALorenzFit", "=", 
+      RowBox[{"parametersTablePreScanLorenzFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "3", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]ALorenzFit", "=", 
+      RowBox[{"parametersTablePreScanLorenzFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "3", ",", "3"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\[Mu]LorenzFit", "=", 
+      RowBox[{"parametersTablePreScanLorenzFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "4", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]\[Mu]LorenzFit", "=", 
+      RowBox[{"parametersTablePreScanLorenzFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "4", ",", "3"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\[Sigma]LorenzFit", "=", 
+      RowBox[{"parametersTablePreScanLorenzFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "5", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]\[Sigma]LorenzFit", "=", 
+      RowBox[{"parametersTablePreScanLorenzFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "5", ",", "3"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"PreScanGaussFit", "=", 
+      RowBox[{"NonlinearModelFit", "[", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "Fitting", " ", "prescan", " ", "data", " ", "with", " ", "gauss"}], 
+        " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"PreScanData", ",", 
+        RowBox[{"gaussian", "[", 
+         RowBox[{
+         "y0", ",", "A", ",", "\[Mu]", ",", " ", "\[Sigma]", ",", "x"}], 
+         "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"y0", ",", 
+            RowBox[{"Max", "[", "PreScanTheta", "]"}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"A", ",", 
+            RowBox[{
+             RowBox[{"Min", "[", "PreScanTheta", "]"}], "-", 
+             RowBox[{"Max", "[", "PreScanTheta", "]"}]}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"\[Mu]", ",", 
+            RowBox[{"PreScanFrequency", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"Position", "[", 
+                RowBox[{"PreScanTheta", ",", 
+                 RowBox[{"Min", "[", "PreScanTheta", "]"}]}], "]"}], "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", "1"}], "]"}], "]"}], "]"}], "]"}]}], "}"}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"\[Sigma]", ",", "10"}], "}"}]}], "}"}], ",", 
+        "\[IndentingNewLine]", "x"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"parametersTablePreScanGaussFit", "=", 
+      RowBox[{"PreScanGaussFit", "[", "\"\<ParameterTable\>\"", "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Getting", " ", "fited", " ", "parameters", " ", "and", " ", "their", 
+       " ", "errors"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"y0GaussFit", "=", 
+      RowBox[{"parametersTablePreScanGaussFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "2", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]y0GaussFit", "=", 
+      RowBox[{"parametersTablePreScanGaussFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "2", ",", "3"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"AGaussFit", "=", 
+      RowBox[{"parametersTablePreScanGaussFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "3", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]AGaussFit", "=", 
+      RowBox[{"parametersTablePreScanGaussFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "3", ",", "3"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\[Mu]GaussFit", "=", 
+      RowBox[{"parametersTablePreScanGaussFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "4", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]\[Mu]GaussFit", "=", 
+      RowBox[{"parametersTablePreScanGaussFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "4", ",", "3"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\[Sigma]GaussFit", "=", 
+      RowBox[{"parametersTablePreScanGaussFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "5", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"\[Delta]\[Sigma]GaussFit", "=", 
+      RowBox[{"parametersTablePreScanGaussFit", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1", ",", "5", ",", "3"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"parametersString", "=", 
+      RowBox[{
+      "\"\<Lorenz fitting ( y0 + 2A/Pi * \[Sigma]/(4 (x-\[Mu])^2+\[Sigma]^2) \
+):\>\"", "<>", "\"\<\\n\\t\>\"", "<>", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "Forming", " ", "a", " ", "string", " ", "with", " ", "fited", " ", 
+         "parameters", " ", "and", " ", "their", " ", "errors"}], " ", "*)"}],
+        "\[IndentingNewLine]", "\"\<y0 = \>\"", "<>", 
+       RowBox[{"ToString", "[", "y0LorenzFit", "]"}], "<>", 
+       "\"\< \[PlusMinus] \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Delta]y0LorenzFit", "]"}], "<>", 
+       "\"\<, t.m. \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"100", "\[Times]", 
+         RowBox[{"Abs", "[", 
+          FractionBox["\[Delta]y0LorenzFit", "y0LorenzFit"], "]"}]}], "]"}], 
+       "<>", "\"\< %\>\"", "<>", "\"\<\\n\\t\>\"", "<>", 
+       "\[IndentingNewLine]", "\"\<A = \>\"", "<>", 
+       RowBox[{"ToString", "[", "ALorenzFit", "]"}], "<>", 
+       "\"\< \[PlusMinus] \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Delta]ALorenzFit", "]"}], "<>", 
+       "\"\<, t.m. \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"100", "\[Times]", 
+         RowBox[{"Abs", "[", 
+          FractionBox["\[Delta]ALorenzFit", "ALorenzFit"], "]"}]}], "]"}], 
+       "<>", "\"\< %\>\"", "<>", "\"\<\\n\\t\>\"", "<>", 
+       "\[IndentingNewLine]", "\"\<\[Mu]/10^3 = \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        FractionBox["\[Mu]LorenzFit", 
+         SuperscriptBox["10", "3"]], "]"}], "<>", "\"\< \[PlusMinus] \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Delta]\[Mu]LorenzFit", "]"}], "<>", 
+       "\"\<, t.m. \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"100", "\[Times]", 
+         RowBox[{"Abs", "[", 
+          FractionBox["\[Delta]\[Mu]LorenzFit", "\[Mu]LorenzFit"], "]"}]}], 
+        "]"}], "<>", "\"\< %\>\"", "<>", "\"\<\\n\\t\>\"", "<>", 
+       "\[IndentingNewLine]", "\"\<\[Sigma] = \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Sigma]LorenzFit", "]"}], "<>", 
+       "\"\< \[PlusMinus] \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Delta]\[Sigma]LorenzFit", "]"}], "<>", 
+       "\"\<, t.m. \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"100", "\[Times]", 
+         RowBox[{"Abs", "[", 
+          FractionBox["\[Delta]\[Sigma]LorenzFit", "\[Sigma]LorenzFit"], 
+          "]"}]}], "]"}], "<>", "\"\< %\>\"", "<>", "\"\<\\n\>\"", "<>", 
+       "\[IndentingNewLine]", 
+       "\"\<Gauss fitting ( y0 + A/(\[Sigma] Sqrt[Pi/2] * Exp[-2(x-\[Mu])^2/\
+\[Sigma]^2] ):\>\"", "<>", "\"\<\\n\\t\>\"", "<>", "\[IndentingNewLine]", 
+       "\"\<y0 = \>\"", "<>", 
+       RowBox[{"ToString", "[", "y0GaussFit", "]"}], "<>", 
+       "\"\< \[PlusMinus] \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Delta]y0GaussFit", "]"}], "<>", 
+       "\"\<, t.m. \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"100", "\[Times]", 
+         RowBox[{"Abs", "[", 
+          FractionBox["\[Delta]y0GaussFit", "y0GaussFit"], "]"}]}], "]"}], 
+       "<>", "\"\< %\>\"", "<>", "\"\<\\n\\t\>\"", "<>", 
+       "\[IndentingNewLine]", "\"\<A = \>\"", "<>", 
+       RowBox[{"ToString", "[", "AGaussFit", "]"}], "<>", 
+       "\"\< \[PlusMinus] \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Delta]AGaussFit", "]"}], "<>", 
+       "\"\<, t.m. \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"100", "\[Times]", 
+         RowBox[{"Abs", "[", 
+          FractionBox["\[Delta]AGaussFit", "AGaussFit"], "]"}]}], "]"}], 
+       "<>", "\"\< %\>\"", "<>", "\"\<\\n\\t\>\"", "<>", 
+       "\[IndentingNewLine]", "\"\<\[Mu]/10^3 = \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        FractionBox["\[Mu]GaussFit", 
+         SuperscriptBox["10", "3"]], "]"}], "<>", "\"\< \[PlusMinus] \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Delta]\[Mu]GaussFit", "]"}], "<>", 
+       "\"\<, t.m. \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"100", "\[Times]", 
+         RowBox[{"Abs", "[", 
+          FractionBox["\[Delta]\[Mu]GaussFit", "\[Mu]GaussFit"], "]"}]}], 
+        "]"}], "<>", "\"\< %\>\"", "<>", "\"\<\\n\\t\>\"", "<>", 
+       "\[IndentingNewLine]", "\"\<\[Sigma] = \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Sigma]GaussFit", "]"}], "<>", 
+       "\"\< \[PlusMinus] \>\"", "<>", 
+       RowBox[{"ToString", "[", "\[Delta]\[Sigma]GaussFit", "]"}], "<>", 
+       "\"\<, t.m. \>\"", "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"100", "\[Times]", 
+         RowBox[{"Abs", "[", 
+          FractionBox["\[Delta]\[Sigma]GaussFit", "\[Sigma]GaussFit"], 
+          "]"}]}], "]"}], "<>", "\"\< %\>\"", "<>", "\"\<\\n\>\""}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Export", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+          RowBox[{"\"\<Data\>\"", "<>", 
+           RowBox[{"ToString", "[", "i", "]"}], "<>", "\"\<_Fit.txt\>\""}]}], 
+         "}"}], "]"}], ",", "parametersString"}], "]"}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Exporting", " ", "string", " ", "from", " ", "above"}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"PreScanFitPlot", "=", 
+      RowBox[{"Show", "[", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "Plotting", " ", "round", " ", "data", " ", "and", " ", "fittings"}], 
+        " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"ListPlot", "[", 
+         RowBox[{"PreScanData", ",", 
+          RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+          RowBox[{
+          "PlotLabel", "\[Rule]", 
+           "\"\<Phase fitting: Lorenz(Red), Gauss(Green)\>\""}], ",", 
+          RowBox[{"AxesLabel", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"\"\<Frequency[Hz]\>\"", ",", "\"\<Phase[Deg]\>\""}], 
+            "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"lorenz", "[", 
+           RowBox[{
+           "y0LorenzFit", ",", "ALorenzFit", ",", "\[Mu]LorenzFit", ",", " ", 
+            "\[Sigma]LorenzFit", ",", "x"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{"Min", "[", "PreScanFrequency", "]"}], ",", 
+            RowBox[{"Max", "[", "PreScanFrequency", "]"}]}], "}"}], ",", 
+          RowBox[{"ColorFunction", "\[Rule]", 
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"x", ",", "y"}], "}"}], ",", "Red"}], "]"}]}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"gaussian", "[", 
+           RowBox[{
+           "y0GaussFit", ",", "AGaussFit", ",", "\[Mu]GaussFit", ",", " ", 
+            "\[Sigma]GaussFit", ",", "x"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{"Min", "[", "PreScanFrequency", "]"}], ",", 
+            RowBox[{"Max", "[", "PreScanFrequency", "]"}]}], "}"}], ",", 
+          RowBox[{"ColorFunction", "\[Rule]", 
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"x", ",", "y"}], "}"}], ",", "Green"}], "]"}]}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], 
+       "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Export", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+          RowBox[{"\"\<Data\>\"", "<>", 
+           RowBox[{"ToString", "[", "i", "]"}], "<>", "\"\<_Fit.png\>\""}]}], 
+         "}"}], "]"}], ",", "PreScanFitPlot"}], "]"}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Exporting", " ", "plot", " ", "from", " ", "above"}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"KineticsData", "=", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir", 
+           ",", 
+           RowBox[{"\"\<Kinetics\>\"", "<>", 
+            RowBox[{"ToString", "[", "i", "]"}], "<>", "\"\<.dat\>\""}]}], 
+          "}"}], "]"}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"2", ";;"}], "]"}], "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Importing", " ", "kinetics", " ", "data"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"KineticsTime", "=", 
+      RowBox[{"KineticsData", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Getting", " ", "time", " ", "column"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"KineticsTheta", "=", 
+      RowBox[{"KineticsData", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Getting", " ", "phase", " ", "column"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"KineticsData", "=", 
+      RowBox[{"Transpose", "[", 
+       RowBox[{"{", 
+        RowBox[{"KineticsTime", ",", "KineticsTheta"}], "}"}], "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Forming", " ", "kinetics", " ", "data"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"TimeMinTheta", "=", 
+      RowBox[{"KineticsTime", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"KineticsTheta", ",", 
+           RowBox[{"Min", "[", "KineticsTheta", "]"}]}], "]"}], "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "1"}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Finding", " ", "phase", " ", "minimum"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Changing", " ", "parameters", " ", "for", " ", "better", " ", 
+       "fitting"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"ALorenzFitFix", "=", 
+      RowBox[{
+       FractionBox["1", "2"], "\[Pi]", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Min", "[", "KineticsTheta", "]"}], "-", "y0LorenzFit"}], 
+        ")"}], " ", "\[Sigma]LorenzFit"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AGaussFitFix", "=", 
+      RowBox[{
+       SqrtBox[
+        FractionBox["\[Pi]", "2"]], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Min", "[", "KineticsTheta", "]"}], "-", "y0LorenzFit"}], 
+        ")"}], " ", "\[Sigma]LorenzFit"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Forming", " ", "data", " ", "for", " ", "kinetics", " ", "fit"}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"TemperatureLorenzFromTime", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"KineticsTime", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", 
+          RowBox[{"lorenzInverse", "[", 
+           RowBox[{
+           "y0LorenzFit", ",", "ALorenzFitFix", ",", "\[Mu]LorenzFit", ",", 
+            " ", "\[Sigma]LorenzFit", ",", 
+            RowBox[{"KineticsTheta", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{
+             RowBox[{"-", 
+              RowBox[{"KineticsTime", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]}], "+", "TimeMinTheta"}]}], 
+           "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"Length", "[", "KineticsTime", "]"}]}], "}"}]}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"TemperatureGaussFromTime", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"KineticsTime", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", 
+          RowBox[{"gaussianInverse", "[", 
+           RowBox[{
+           "y0GaussFit", ",", "AGaussFitFix", ",", "\[Mu]GaussFit", ",", " ", 
+            "\[Sigma]GaussFit", ",", 
+            RowBox[{"KineticsTheta", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{
+             RowBox[{"-", 
+              RowBox[{"KineticsTime", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]}], "+", "TimeMinTheta"}]}], 
+           "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"Length", "[", "KineticsTime", "]"}]}], "}"}]}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Frequency", " ", "\[Rule]", " ", "\[CapitalDelta]Temperature"}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TemperatureLorenzFromTime", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}], "=", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"TemperatureLorenzFromTime", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "2"}], "]"}], "]"}], "-", 
+        RowBox[{"TemperatureLorenzFromTime", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "2"}], "]"}], "]"}]}], "Kprt"]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TemperatureGaussFromTime", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}], "=", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"TemperatureGaussFromTime", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "2"}], "]"}], "]"}], "-", 
+        RowBox[{"TemperatureGaussFromTime", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "2"}], "]"}], "]"}]}], "Kprt"]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Forming", " ", "data", " ", "for", " ", "plotting", " ", "and", " ", 
+       "exporting"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TemperatureLorenzKineticsPlot", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "=", "TemperatureLorenzFromTime"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TemperatureGaussKineticsPlot", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "=", "TemperatureGaussFromTime"}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TemperatureLorenzKineticsExport", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "=", 
+      RowBox[{"Prepend", "[", 
+       RowBox[{"TemperatureLorenzFromTime", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\"\<Time[s] Lorenz \>\"", "<>", 
+           RowBox[{"ToString", "[", "i", "]"}]}], ",", 
+          "\"\<\[CapitalDelta]Temperature[C]\>\""}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TemperatureGaussKineticsExport", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "=", 
+      RowBox[{"Prepend", "[", 
+       RowBox[{"TemperatureGaussFromTime", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\"\<Time[s] Gauss \>\"", "<>", 
+           RowBox[{"ToString", "[", "i", "]"}]}], ",", 
+          "\"\<\[CapitalDelta]Temperature[C]\>\""}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"TemperatureLorenzKineticsPlotRound", "=", " ", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "TemperatureLorenzFromTime", ",", "TemperatureGaussFromTime"}], 
+         "}"}], ",", 
+        RowBox[{"(*", " ", 
+         RowBox[{"Plotting", " ", "round", " ", "kinetics", " ", "data"}], 
+         " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"PlotLabel", "\[Rule]", 
+         RowBox[{
+         "\"\<Lorenz(Blue) and Gauss(Orange) phase fitting for round \>\"", "<>", 
+          RowBox[{"ToString", "[", "i", "]"}]}]}], ",", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Time[s]\>\"", ",", "\"\<\[CapitalDelta]Temperature[C]\>\""}], 
+          "}"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Export", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+          RowBox[{"\"\<KineticsRound\>\"", "<>", 
+           RowBox[{"ToString", "[", "i", "]"}], "<>", "\"\<.png\>\""}]}], 
+         "}"}], "]"}], ",", "TemperatureLorenzKineticsPlotRound"}], "]"}], 
+     ";"}]}], 
+   RowBox[{"(*", " ", 
+    RowBox[{"Exporting", " ", "plot", " ", "from", " ", "above"}], " ", 
+    "*)"}], "\[IndentingNewLine]", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6980774986092625`*^9, 3.6980777906869354`*^9}, {
+   3.698078052347118*^9, 3.6980780709398108`*^9}, {3.698078155571167*^9, 
+   3.6980781576607676`*^9}, {3.6981328890767508`*^9, 
+   3.6981328907271476`*^9}, {3.6985638408128085`*^9, 
+   3.6985638416063776`*^9}, {3.6985639424578857`*^9, 3.698563994554695*^9}, {
+   3.6985640302379003`*^9, 3.698564034235724*^9}, {3.698564090248175*^9, 
+   3.698564097901582*^9}, {3.6985642084676805`*^9, 3.698564215875923*^9}, {
+   3.6985642687983017`*^9, 3.6985643910826874`*^9}, {3.698564457428265*^9, 
+   3.698564457838545*^9}, {3.698564497525589*^9, 3.698564540566991*^9}, {
+   3.6985645715798864`*^9, 3.6985646906018505`*^9}, {3.698564749371352*^9, 
+   3.698564812981001*^9}, {3.698565065907784*^9, 3.6985652135167737`*^9}, {
+   3.698565507468403*^9, 3.6985655119895964`*^9}, {3.6985655514574757`*^9, 
+   3.6985656250904865`*^9}, {3.6985656780999293`*^9, 3.69856570640792*^9}, {
+   3.698566666211317*^9, 3.6985667849223785`*^9}, {3.6985668432645884`*^9, 
+   3.698566847413519*^9}, {3.6985671944381275`*^9, 3.69856726923396*^9}, {
+   3.6985673252775927`*^9, 3.6985673651417513`*^9}, {3.698567403305709*^9, 
+   3.698567532507718*^9}, {3.698567578477189*^9, 3.6985677644965997`*^9}, 
+   3.6985678716850452`*^9, 3.698568139625778*^9, {3.6985734486189556`*^9, 
+   3.6985734495626216`*^9}, {3.6985735106357613`*^9, 3.698573512042755*^9}, {
+   3.698573971842271*^9, 3.6985739772689867`*^9}, {3.698574008566105*^9, 
+   3.6985740094773436`*^9}, {3.698574045162562*^9, 3.6985740481556644`*^9}, {
+   3.6985744639700403`*^9, 3.698574499544166*^9}, {3.698574636885436*^9, 
+   3.69857465845267*^9}, {3.698574793491389*^9, 3.6985748254054575`*^9}, {
+   3.698574912810197*^9, 3.6985749210450125`*^9}, 3.6985749669144125`*^9, {
+   3.698575611468486*^9, 3.698575681904228*^9}, {3.6986315468258276`*^9, 
+   3.6986316222999334`*^9}, {3.6986316577927647`*^9, 
+   3.6986317166856995`*^9}, {3.6986318438078947`*^9, 3.698632019136828*^9}, {
+   3.698632110461842*^9, 3.6986323840955057`*^9}, {3.6998778991709747`*^9, 
+   3.699877911445326*^9}, {3.6998783789042854`*^9, 3.699878383026311*^9}, {
+   3.6999652712079325`*^9, 3.6999653046349554`*^9}, {3.699965337262702*^9, 
+   3.699965352311903*^9}, {3.699965478855918*^9, 3.6999654794965487`*^9}, {
+   3.699965684756976*^9, 3.699965755276025*^9}, {3.699966150094866*^9, 
+   3.6999661669368305`*^9}, {3.6999663771577272`*^9, 
+   3.6999664561039047`*^9}, {3.7000249481007175`*^9, 3.7000249818315563`*^9}, 
+   3.7153366028871536`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "calculated", " ", "data"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+         RowBox[{"\"\<LorenzKinetics\>\"", "<>", "\"\<.xlsx\>\""}]}], "}"}], 
+       "]"}], ",", "TemperatureLorenzKineticsExport"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+         RowBox[{"\"\<GaussKinetics\>\"", "<>", "\"\<.xlsx\>\""}]}], "}"}], 
+       "]"}], ",", "TemperatureGaussKineticsExport"}], "]"}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.69857356667863*^9, 3.6985736000472107`*^9}, {
+  3.6985740525958014`*^9, 3.698574055646956*^9}, {3.69857411965617*^9, 
+  3.6985742551384583`*^9}, {3.6985744593998127`*^9, 3.698574460088297*^9}, {
+  3.6985756007769237`*^9, 3.69857560126727*^9}, {3.698575689484583*^9, 
+  3.6985756987151136`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Getting", " ", "plots", " ", "for", " ", "kinetics", " ", "and", " ", 
+    "exporting", " ", "them"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"TemperatureLorenzKineticsPlotAll", "=", " ", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"TemperatureLorenzKineticsPlot", ",", 
+       RowBox[{"PlotLabel", "\[Rule]", "\"\<Lorenz phase fitting\>\""}], ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Time[s]\>\"", ",", "\"\<\[CapitalDelta]Temperature[C]\>\""}], 
+         "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"TemperatureGaussKineticsPlotAll", "=", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"TemperatureGaussKineticsPlot", ",", 
+       RowBox[{"PlotLabel", "\[Rule]", "\"\<Gauss phase fitting\>\""}], ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Time[s]\>\"", ",", "\"\<\[CapitalDelta]Temperature[C]\>\""}], 
+         "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+         RowBox[{"\"\<LorenzKinetics\>\"", "<>", "\"\<.png\>\""}]}], "}"}], 
+       "]"}], ",", "TemperatureLorenzKineticsPlotAll"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+         RowBox[{"\"\<GaussKinetics\>\"", "<>", "\"\<.png\>\""}]}], "}"}], 
+       "]"}], ",", "TemperatureGaussKineticsPlotAll"}], "]"}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.6985662698079786`*^9, 3.69856627990212*^9}, {
+   3.698566331034237*^9, 3.6985664510255003`*^9}, {3.698566635256441*^9, 
+   3.6985666566165295`*^9}, {3.6985681267076535`*^9, 3.69856813373962*^9}, {
+   3.6985737384148855`*^9, 3.6985737476323957`*^9}, {3.698573779107629*^9, 
+   3.698573813566472*^9}, {3.6985740580666656`*^9, 3.6985740610677967`*^9}, {
+   3.6985755976827483`*^9, 3.698575598210111*^9}, {3.698575703489475*^9, 
+   3.6985757147043967`*^9}, 3.699966662734715*^9, 3.7153365057763042`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+   "TemperatureLorenzKineticsPlotAll", ",", 
+    "TemperatureGaussKineticsPlotAll"}], "}"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Showing", " ", "plots", " ", "from", " ", "above"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.698566452579587*^9, 3.6985664593293657`*^9}, {
+  3.6985666429168634`*^9, 3.6985666441657453`*^9}, {3.6985755880803485`*^9, 
+  3.69857559081628*^9}, {3.6985757178646297`*^9, 3.6985757228941813`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   GraphicsBox[{{}, {}, {}, {}, {{}, {}}},
+    AlignmentPoint->Center,
+    AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+    Axes->{True, True},
+    AxesLabel->{
+      FormBox["\"Time[s]\"", TraditionalForm], 
+      FormBox["\"\[CapitalDelta]Temperature[C]\"", TraditionalForm]},
+    AxesOrigin->{0, 0},
+    AxesStyle->{},
+    Background->None,
+    BaseStyle->{},
+    BaselinePosition->Automatic,
+    ColorOutput->Automatic,
+    ContentSelectable->Automatic,
+    CoordinatesToolOptions:>Automatic,
+    DisplayFunction->Identity,
+    Epilog->{},
+    FormatType:>TraditionalForm,
+    Frame->{{False, False}, {False, False}},
+    FrameLabel->{{None, None}, {None, None}},
+    FrameStyle->{},
+    FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+    FrameTicksStyle->{},
+    GridLines->{None, None},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    ImageMargins->0.,
+    ImagePadding->All,
+    ImageSize->Medium,
+    ImageSizeRaw->Automatic,
+    LabelStyle->{},
+    Method->{
+     "MessagesHead" -> ListPlot, 
+      "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+          (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+           Part[#, 1]], 
+          (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+           Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+          (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+           Part[#, 1]], 
+          (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+           Part[#, 2]]}& )}},
+    PlotLabel->FormBox["\"Lorenz phase fitting\"", TraditionalForm],
+    PlotRange->{{0, 1}, {0, 1}},
+    PlotRangeClipping->True,
+    PlotRangePadding->{{
+       Scaled[0.02], 
+       Scaled[0.02]}, {
+       Scaled[0.02], 
+       Scaled[0.05]}},
+    PlotRegion->Automatic,
+    PreserveImageOptions->Automatic,
+    Prolog->{},
+    RotateLabel->True,
+    Ticks->{Automatic, Automatic},
+    TicksStyle->{}], ",", 
+   GraphicsBox[{{}, {}, {}, {}, {{}, {}}},
+    AlignmentPoint->Center,
+    AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+    Axes->{True, True},
+    AxesLabel->{
+      FormBox["\"Time[s]\"", TraditionalForm], 
+      FormBox["\"\[CapitalDelta]Temperature[C]\"", TraditionalForm]},
+    AxesOrigin->{0, 0},
+    AxesStyle->{},
+    Background->None,
+    BaseStyle->{},
+    BaselinePosition->Automatic,
+    ColorOutput->Automatic,
+    ContentSelectable->Automatic,
+    CoordinatesToolOptions:>Automatic,
+    DisplayFunction->Identity,
+    Epilog->{},
+    FormatType:>TraditionalForm,
+    Frame->{{False, False}, {False, False}},
+    FrameLabel->{{None, None}, {None, None}},
+    FrameStyle->{},
+    FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+    FrameTicksStyle->{},
+    GridLines->{None, None},
+    GridLinesStyle->Directive[
+      GrayLevel[0.5, 0.4]],
+    ImageMargins->0.,
+    ImagePadding->All,
+    ImageSize->Medium,
+    ImageSizeRaw->Automatic,
+    LabelStyle->{},
+    Method->{
+     "MessagesHead" -> ListPlot, 
+      "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+          (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+           Part[#, 1]], 
+          (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+           Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+          (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+           Part[#, 1]], 
+          (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+           Part[#, 2]]}& )}},
+    PlotLabel->FormBox["\"Gauss phase fitting\"", TraditionalForm],
+    PlotRange->{{0, 1}, {0, 1}},
+    PlotRangeClipping->True,
+    PlotRangePadding->{{
+       Scaled[0.02], 
+       Scaled[0.02]}, {
+       Scaled[0.02], 
+       Scaled[0.05]}},
+    PlotRegion->Automatic,
+    PreserveImageOptions->Automatic,
+    Prolog->{},
+    RotateLabel->True,
+    Ticks->{Automatic, Automatic},
+    TicksStyle->{}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.69996632944158*^9, {3.6999664421968365`*^9, 3.6999664614088473`*^9}, {
+   3.699966534660348*^9, 3.6999665460522184`*^9}, 3.6999666259473095`*^9, 
+   3.7000250141727395`*^9, 3.715336573360005*^9, 3.7153366109180856`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"l", "=", 
+    RowBox[{
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"lorenz", "[", 
+         RowBox[{
+         "y0", ",", "A", ",", "\[Mu]", ",", "\[Sigma]", ",", "\[Mu]"}], "]"}],
+         "\[Equal]", "n"}], ",", "A"}], "]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ",", 
+   RowBox[{"lorenz", "[", 
+    RowBox[{"y0", ",", 
+     RowBox[{"A", "/.", "l"}], ",", "\[Mu]", ",", "\[Sigma]", ",", "\[Mu]"}], 
+    "]"}]}], "}"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"g", "=", 
+    RowBox[{
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"gaussian", "[", 
+         RowBox[{
+         "y0", ",", "A", ",", "\[Mu]", ",", "\[Sigma]", ",", "\[Mu]"}], "]"}],
+         "\[Equal]", "n"}], ",", "A"}], "]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ",", 
+   RowBox[{"gaussian", "[", 
+    RowBox[{"y0", ",", 
+     RowBox[{"A", "/.", "g"}], ",", "\[Mu]", ",", "\[Sigma]", ",", "\[Mu]"}], 
+    "]"}]}], "}"}]}], "Input",
+ CellChangeTimes->{{3.699965532386489*^9, 3.699965622078703*^9}, {
+  3.6999661863822465`*^9, 3.6999662014765005`*^9}, {3.6999663462309494`*^9, 
+  3.699966364888723*^9}, {3.699966560257193*^9, 3.6999665733374214`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"A", "\[Rule]", 
+    RowBox[{
+     FractionBox["1", "2"], " ", "\[Pi]", " ", 
+     RowBox[{"(", 
+      RowBox[{"n", "-", "y0"}], ")"}], " ", "\[Sigma]"}]}], ",", "n"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.6999655614193587`*^9, 3.699965622375577*^9}, {
+   3.699966183051814*^9, 3.699966201882738*^9}, 3.6999663653731008`*^9, {
+   3.699966534707222*^9, 3.6999665691811266`*^9}, 3.6999666260254407`*^9, 
+   3.700025014327278*^9, 3.715336611090207*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"A", "\[Rule]", 
+    RowBox[{
+     SqrtBox[
+      FractionBox["\[Pi]", "2"]], " ", 
+     RowBox[{"(", 
+      RowBox[{"n", "-", "y0"}], ")"}], " ", "\[Sigma]"}]}], ",", "n"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.6999655614193587`*^9, 3.699965622375577*^9}, {
+   3.699966183051814*^9, 3.699966201882738*^9}, 3.6999663653731008`*^9, {
+   3.699966534707222*^9, 3.6999665691811266`*^9}, 3.6999666260254407`*^9, 
+   3.700025014327278*^9, 3.7153366110992126`*^9}]
+}, Open  ]]
+},
+WindowSize->{1366, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 312, 8, 87, "Text"],
+Cell[873, 30, 469, 9, 47, "Input"],
+Cell[1345, 41, 542, 12, 30, "Input"],
+Cell[1890, 55, 549, 14, 50, "Input"],
+Cell[2442, 71, 4291, 119, 328, "Input"],
+Cell[6736, 192, 2074, 54, 214, "Input"],
+Cell[8813, 248, 27794, 625, 2500, "Input"],
+Cell[36610, 875, 1226, 30, 103, "Input"],
+Cell[37839, 907, 2505, 57, 177, "Input"],
+Cell[CellGroupData[{
+Cell[40369, 968, 482, 11, 30, "Input"],
+Cell[40854, 981, 4202, 118, 239, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45093, 1104, 1319, 37, 84, "Input"],
+Cell[46415, 1143, 506, 12, 46, "Output"],
+Cell[46924, 1157, 514, 13, 57, "Output"]
+}, Open  ]]
+}
+]
+*)
+

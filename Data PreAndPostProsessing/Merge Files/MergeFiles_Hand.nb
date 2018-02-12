@@ -1,0 +1,271 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8900,        263]
+NotebookOptionsPosition[      8209,        236]
+NotebookOutlinePosition[      8549,        251]
+CellTagsIndexPosition[      8506,        248]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+This script is a part of ANGEL project.
+V 1.0
+2017.10.01
+(C) Vulpes Corsac\
+\>", "Text",
+ CellChangeTimes->{{3.698631723375579*^9, 3.698631756693108*^9}, {
+  3.7077250839129024`*^9, 3.7077250841570764`*^9}, {3.7158440200862136`*^9, 
+  3.715844022025589*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Variables", " ", "clearing"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{3.698387665880822*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Data11", "=", 
+   RowBox[{
+    RowBox[{"Import", "[", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+      "\"\<Continuous11.dat\>\""}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"2", ";;"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Data12", "=", 
+   RowBox[{
+    RowBox[{"Import", "[", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+      "\"\<Continuous12.dat\>\""}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"2", ";;"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Data21", "=", 
+   RowBox[{
+    RowBox[{"Import", "[", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+      "\"\<Continuous21.dat\>\""}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"2", ";;"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Data22", "=", 
+   RowBox[{
+    RowBox[{"Import", "[", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+      "\"\<Continuous22.dat\>\""}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"2", ";;"}], "]"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.688527354567958*^9, 3.6885273893927803`*^9}, 
+   3.688979981381816*^9, {3.6889851921963186`*^9, 3.68898521839821*^9}, {
+   3.700218252782067*^9, 3.7002182569872875`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Min", "[", 
+    RowBox[{"Data11", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "]"}], ",", 
+   RowBox[{"Max", "[", 
+    RowBox[{"Data11", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "]"}]}], 
+  "}"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Data12", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "8"}], "]"}], "]"}], "=", 
+   RowBox[{
+    RowBox[{"Data12", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "+", 
+    RowBox[{"1", "\[Times]", "2610"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Min", "[", 
+    RowBox[{"Data12", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "]"}], ",", 
+   RowBox[{"Max", "[", 
+    RowBox[{"Data12", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "]"}]}], "}"}]}], "Input",
+ CellChangeTimes->{{3.6885274207092304`*^9, 3.688527591217434*^9}, {
+   3.6885276775586524`*^9, 3.6885276836562033`*^9}, {3.6885277263700085`*^9, 
+   3.688527747377529*^9}, {3.6885319391613064`*^9, 3.688532004761582*^9}, {
+   3.6885322154371057`*^9, 3.6885322348804445`*^9}, {3.6885331888484864`*^9, 
+   3.6885332169662704`*^9}, {3.6885332581999598`*^9, 
+   3.6885332833954973`*^9}, {3.6887837505713625`*^9, 3.688783753132043*^9}, {
+   3.688980008961917*^9, 3.688980026560478*^9}, {3.6889800695350323`*^9, 
+   3.6889801375969005`*^9}, {3.6889801924622126`*^9, 
+   3.6889802150682073`*^9}, {3.688980246604748*^9, 3.6889803158894196`*^9}, {
+   3.6889803474204617`*^9, 3.68898034946795*^9}, {3.688980381422351*^9, 
+   3.688980407434292*^9}, {3.6889804441998444`*^9, 3.6889804455123534`*^9}, {
+   3.688980483145646*^9, 3.688980484335243*^9}, {3.688980535905105*^9, 
+   3.6889805380144978`*^9}, 3.6889805701955585`*^9, {3.6889811501424103`*^9, 
+   3.688981161994254*^9}, {3.6889812062352695`*^9, 3.6889812067508984`*^9}, {
+   3.6889812772276645`*^9, 3.6889813139909096`*^9}, {3.688981348347374*^9, 
+   3.6889813647137055`*^9}, {3.6889813951263943`*^9, 3.68898139928269*^9}, {
+   3.6889852756184244`*^9, 3.688985358439021*^9}, {3.6889853983390512`*^9, 
+   3.6889854018633223`*^9}, {3.688985432565596*^9, 3.688985434153702*^9}, {
+   3.688985518551622*^9, 3.68898554309542*^9}, {3.700218269911293*^9, 
+   3.700218270801941*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1.01900010486133396626`20.008174228697985", ",", 
+   "2595.77300010493490845`20.414266710812342"}], "}"}]], "Output",
+ CellChangeTimes->{3.688985940955614*^9, 3.700218294426921*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "2611.01200000382959842682`23.41680886781049", ",", 
+   "4957.04100000381004065`20.695222510997496"}], "}"}]], "Output",
+ CellChangeTimes->{3.688985940955614*^9, 3.7002182944581833`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Min", "[", 
+    RowBox[{"Data21", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "]"}], ",", 
+   RowBox[{"Max", "[", 
+    RowBox[{"Data21", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "]"}]}], 
+  "}"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Data22", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "8"}], "]"}], "]"}], "=", 
+   RowBox[{
+    RowBox[{"Data22", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "+", "2616"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Min", "[", 
+    RowBox[{"Data22", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "]"}], ",", 
+   RowBox[{"Max", "[", 
+    RowBox[{"Data22", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "8"}], "]"}], "]"}], "]"}]}], "}"}]}], "Input",
+ CellChangeTimes->{{3.6889805816724052`*^9, 3.6889806977906065`*^9}, {
+   3.6889807762450123`*^9, 3.688980778104415*^9}, {3.688980831682535*^9, 
+   3.6889808339013033`*^9}, {3.688980875680354*^9, 3.6889808771022406`*^9}, {
+   3.6889809507011943`*^9, 3.6889809852006965`*^9}, {3.688981426860677*^9, 
+   3.6889814333315506`*^9}, 3.688981672195814*^9, {3.68898547388122*^9, 
+   3.6889855103437104`*^9}, {3.688985549715537*^9, 3.6889855981703653`*^9}, {
+   3.6889856712510605`*^9, 3.6889856742211905`*^9}, {3.6889857246519766`*^9, 
+   3.6889857608503337`*^9}, {3.7002182770686717`*^9, 3.7002182785686865`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.772000047727487981319`20.8876173271852", ",", 
+   "2589.76400004769675434`20.413260189507163"}], "}"}]], "Output",
+ CellChangeTimes->{3.6889859411313295`*^9, 3.700218294505047*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "2616.759000011486932635307`24.417763726543296", ",", 
+   "4943.1190000114729628`20.694001065736167"}], "}"}]], "Output",
+ CellChangeTimes->{3.6889859411313295`*^9, 3.700218294536297*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Data1", "=", 
+   RowBox[{"Join", "[", 
+    RowBox[{"Data11", ",", "Data12"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Data2", "=", 
+   RowBox[{"Join", "[", 
+    RowBox[{"Data21", ",", "Data22"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6885275951862183`*^9, 3.688527633215753*^9}, 
+   3.688979997246025*^9, {3.68898523588531*^9, 3.688985256515983*^9}, {
+   3.700218284539675*^9, 3.700218287242828*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+     "\"\<Continuous1.dat\>\""}], ",", "Data1"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+     "\"\<Continuous2.dat\>\""}], ",", "Data2"}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.688527636793617*^9, 3.6885276721678486`*^9}}]
+},
+WindowSize->{667, 669},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 268, 8, 87, "Text"],
+Cell[829, 30, 226, 6, 47, "Input"],
+Cell[1058, 38, 1330, 39, 158, "Input"],
+Cell[CellGroupData[{
+Cell[2413, 81, 2359, 51, 121, "Input"],
+Cell[4775, 134, 224, 5, 30, "Output"],
+Cell[5002, 141, 228, 5, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5267, 151, 1516, 39, 121, "Input"],
+Cell[6786, 192, 225, 5, 30, "Output"],
+Cell[7014, 199, 229, 5, 30, "Output"]
+}, Open  ]],
+Cell[7258, 207, 468, 11, 84, "Input"],
+Cell[7729, 220, 476, 14, 84, "Input"]
+}
+]
+*)
+

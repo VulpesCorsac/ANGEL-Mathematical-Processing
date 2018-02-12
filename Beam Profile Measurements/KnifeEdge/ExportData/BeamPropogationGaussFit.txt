@@ -1,0 +1,10 @@
+Beam diameters Gauss fit ( Sqrt[A2*x^2+A1*x+A0] ) :
+	A2 = 1156.78 ± 109.665, t.m. 9.4802 %
+	A1 = -2025.04 ± 430.364, t.m. 21.2521 %
+	A0 = 5288.13 ± 1652.04, t.m. 31.2405 %
+From ГОСТ Р ИСО 11146-1-2008-1 ( ISO 11146-1:2005 ):
+	z0[waist coordinate] = 0.875292 ± -0.103038, t.m. 11.7719 %
+	d_sigma0[waist]= 66.3467 ± 13.4124, t.m. 20.2157 %
+	Theta_sigma[divergence angle] = 34.0115 ± 0.047401, t.m. 0.139368 %
+	z_R[Rayleigh distance] = 1.95071 ± 0.578602, t.m. 29.661 %
+	M2[Beam quality] = 1.14341 ± 0.23075, t.m. 20.1808 %

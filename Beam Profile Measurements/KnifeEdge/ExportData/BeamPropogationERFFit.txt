@@ -1,0 +1,10 @@
+Beam diameters ERF fit ( Sqrt[A2*x^2+A1*x+A0] ) :
+	A2 = 1335.03 ± 56.2605, t.m. 4.21417 %
+	A1 = -1985.99 ± 229.04, t.m. 11.5328 %
+	A0 = 3585.88 ± 756.863, t.m. 21.1067 %
+From ГОСТ Р ИСО 11146-1-2008-1 ( ISO 11146-1:2005 ):
+	z0[waist coordinate] = 0.743799 ± -0.0544358, t.m. 7.31861 %
+	d_sigma0[waist]= 53.36 ± 6.91941, t.m. 12.9674 %
+	Theta_sigma[divergence angle] = 36.5381 ± 0.0210708, t.m. 0.0576682 %
+	z_R[Rayleigh distance] = 1.4604 ± 0.250708, t.m. 17.1671 %
+	M2[Beam quality] = 0.987916 ± 0.127965, t.m. 12.953 %

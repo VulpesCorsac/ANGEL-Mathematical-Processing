@@ -1,0 +1,75 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      1917,         67]
+NotebookOptionsPosition[      1642,         53]
+NotebookOutlinePosition[      1985,         68]
+CellTagsIndexPosition[      1942,         65]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+This script is a part of ANGEL project.
+V 1.0
+2017.11.25
+(C) Vulpes Corsac\
+\>", "Text",
+ CellChangeTimes->{{3.698631723375579*^9, 3.698631756693108*^9}, {
+  3.7077252472203045`*^9, 3.7077252474034348`*^9}, {3.720597245898672*^9, 
+  3.7205972489169683`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Variables", " ", "clearing"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Needs", "[", "\"\<JLink`\>\"", "]"}], ";", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Not", " ", "to", " ", "be", " ", "any", " ", "problems", " ", "with", 
+     " ", "exporting"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"ReinstallJava", "[", 
+    RowBox[{"JVMArguments", " ", "\[Rule]", " ", "\"\<-Xmx512m\>\""}], "]"}], 
+   ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"DO", " ", "NOT", " ", 
+    RowBox[{"TOUCH", "!"}]}], " ", "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{
+  3.698387665880822*^9, {3.7270825885404367`*^9, 3.7270825895081115`*^9}}]
+},
+WindowSize->{1366, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 268, 8, 87, "Text"],
+Cell[829, 30, 809, 21, 124, "Input"]
+}
+]
+*)
+

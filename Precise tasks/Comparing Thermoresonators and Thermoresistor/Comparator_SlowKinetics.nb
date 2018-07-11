@@ -1,0 +1,1435 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     54872,       1427]
+NotebookOptionsPosition[     53695,       1390]
+NotebookOutlinePosition[     54068,       1406]
+CellTagsIndexPosition[     54025,       1403]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+This script is a part of ANGEL project.
+V 1.0
+2018.05.10
+(C) Vulpes Corsac\
+\>", "Text",
+ CellChangeTimes->{{3.698631723375579*^9, 3.698631756693108*^9}, {
+   3.698632459765514*^9, 3.6986324635785203`*^9}, {3.6999661708749857`*^9, 
+   3.6999661714531193`*^9}, {3.7077251360709095`*^9, 
+   3.7077251377691126`*^9}, {3.7158448355128565`*^9, 
+   3.7158448394891777`*^9}, {3.7270020767158184`*^9, 3.7270020871113715`*^9}, 
+   3.72700731676396*^9, {3.7349251760215673`*^9, 3.734925185433506*^9}, {
+   3.7349323928303623`*^9, 3.734932393424117*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Clearing", " ", "all", " ", "variables"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Needs", "[", "\"\<JLink`\>\"", "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Not", " ", "to", " ", "be", " ", "any", " ", "problems", " ", "with", " ",
+     "exporting"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ReinstallJava", "[", 
+    RowBox[{"JVMArguments", " ", "\[Rule]", " ", "\"\<-Xmx512m\>\""}], "]"}], 
+   ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"DO", " ", "NOT", " ", 
+    RowBox[{"TOUCH", "!"}]}], " ", "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6863952466113963`*^9, 3.6863952747216587`*^9}, {
+  3.6981327252035227`*^9, 3.6981327257537994`*^9}, {3.6985637247107983`*^9, 
+  3.698563732529333*^9}, {3.698565374961694*^9, 3.698565410084504*^9}, {
+  3.6985655174434385`*^9, 3.6985655178126993`*^9}, {3.700232387982004*^9, 
+  3.700232409680169*^9}, {3.7077251547356515`*^9, 3.7077251706865*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Kprt", "=", 
+    RowBox[{"-", "136"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    SuperscriptBox["K", "prt"], " ", "for", " ", "current", " ", 
+    "resonance"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.6980780272850294`*^9, 3.6980780313716307`*^9}, 
+   3.6980780861467614`*^9, 3.6980781665336523`*^9, {3.6980782078736167`*^9, 
+   3.698078208325486*^9}, {3.6985637832931776`*^9, 3.698563797195015*^9}, {
+   3.69863128528267*^9, 3.6986312874233165`*^9}, 3.7108474965597286`*^9, {
+   3.7153367132521267`*^9, 3.715336713345193*^9}, 3.727002551178417*^9, {
+   3.727008308017688*^9, 3.7270083206159124`*^9}, {3.734925198100754*^9, 
+   3.7349252080312004`*^9}, {3.7349347388535957`*^9, 3.734934738916114*^9}, {
+   3.7349374334521956`*^9, 3.7349374336553335`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"importDir", " ", "=", " ", "\"\<\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Directory", " ", "for", " ", "importing", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"exportDir", " ", "=", " ", "\"\<\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Directory", " ", "for", " ", "exporting", " ", "data"}], " ", 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.6985679656003838`*^9, 3.698568002445881*^9}, 
+   3.6985680545957165`*^9, {3.7349252038358784`*^9, 3.7349252062265244`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"phaseColumnName", "=", "\"\<Theta\>\""}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Name", " ", "of", " ", "column", " ", "in", " ", "data", " ", "file", " ",
+     "with", " ", "phase"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"frequencyColumnName", "=", "\"\<Fext\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Name", " ", "of", " ", "column", " ", "in", " ", "data", " ", "file", " ",
+     "with", " ", "frequency"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"timeRoundColumnName", "=", "\"\<TimeAll\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Name", " ", "of", " ", "column", " ", "in", " ", "data", " ", "file", " ",
+     "with", " ", "time"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"timeKineticsColumnName", "=", "\"\<Time\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Name", " ", "of", " ", "column", " ", "in", " ", "data", " ", "file", " ",
+     "with", " ", "time"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PrescanDataFileName", "=", "\"\<Prescan.dat\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Name", " ", "of", " ", "file", " ", "with", " ", "prescan"}], " ",
+    "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"RoundDataFileName", "=", "\"\<Kinetic_Round_1.dat\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Name", " ", "of", " ", "file", " ", "with", " ", "first", " ", "round"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"KineticsDataFileName", "=", "\"\<Kinetic.dat\>\""}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Name", " ", "of", " ", "file", " ", "with", " ", "slow", " ", 
+    "kinetics"}], " ", "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.727002421970359*^9, 3.7270024328204947`*^9}, 
+   3.727008128792468*^9, {3.734925275517185*^9, 3.734925302227021*^9}, {
+   3.734931589162326*^9, 3.7349316273258123`*^9}, 3.7349317198294845`*^9, {
+   3.7349328059075165`*^9, 3.734932871287427*^9}, {3.7349338232112055`*^9, 
+   3.7349338237667694`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"lorenz", "[", 
+     RowBox[{
+     "y0_", ",", "A_", ",", "\[Mu]_", ",", " ", "\[Sigma]_", ",", " ", "x_"}],
+      "]"}], ":=", 
+    RowBox[{"y0", " ", "+", " ", 
+     RowBox[{
+      FractionBox[
+       RowBox[{"2", "A"}], "\[Pi]"], "\[Times]", 
+      FractionBox["\[Sigma]", 
+       RowBox[{
+        RowBox[{"4", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"x", "-", "\[Mu]"}], ")"}], "2"]}], "+", 
+        SuperscriptBox["\[Sigma]", "2"]}]]}]}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Lorenz", " ", "function"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"lorenzInverse", "[", 
+     RowBox[{
+     "y0_", ",", "A_", ",", "\[Mu]_", ",", " ", "\[Sigma]_", ",", " ", "y_", 
+      ",", "sgn_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Sign", "[", "sgn", "]"}], "\[Times]", 
+      SqrtBox[
+       RowBox[{
+        FractionBox[
+         RowBox[{"2", " ", "A", " ", "\[Sigma]"}], 
+         RowBox[{"4", " ", "\[Pi]", " ", 
+          RowBox[{"(", 
+           RowBox[{"y", "-", "y0"}], ")"}]}]], "-", 
+        FractionBox[
+         SuperscriptBox["\[Sigma]", "2"], "4"]}]]}], "+", "\[Mu]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Inverse", " ", "Lorenz", " ", "function"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"paraboloid", "[", 
+     RowBox[{"y0_", ",", "A_", ",", "\[Mu]_", ",", "x_"}], "]"}], " ", ":=", 
+    " ", 
+    RowBox[{"y0", " ", "+", " ", 
+     RowBox[{"A", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"x", "-", "\[Mu]"}], ")"}], "2"]}]}]}], ";"}], 
+  RowBox[{
+  "(*", " ", "Paraboloid", " ", "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{
+  3.6877886792335563`*^9, {3.687788787501904*^9, 3.6877888269516344`*^9}, {
+   3.687788877445051*^9, 3.6877890381774607`*^9}, {3.687789132186021*^9, 
+   3.6877891824680076`*^9}, {3.6877892773584204`*^9, 
+   3.6877892832248025`*^9}, {3.6877899687059183`*^9, 3.687789994535322*^9}, 
+   3.6877908266557665`*^9, {3.6877908637327538`*^9, 3.687790966656809*^9}, {
+   3.6877910009823523`*^9, 3.6877910146161585`*^9}, {3.687856195067058*^9, 
+   3.687856210117498*^9}, {3.6878563221595716`*^9, 3.6878563312005258`*^9}, 
+   3.687856516454857*^9, {3.6980732379233627`*^9, 3.698073298039791*^9}, {
+   3.6980733975142403`*^9, 3.6980734453531275`*^9}, {3.698073596729477*^9, 
+   3.698073676742638*^9}, {3.698073711601201*^9, 3.6980737263502645`*^9}, {
+   3.698073795366977*^9, 3.698073795827388*^9}, {3.6980755291071577`*^9, 
+   3.698075535247254*^9}, {3.6980780240012555`*^9, 3.698078025360643*^9}, {
+   3.6985637346037965`*^9, 3.698563775513693*^9}, {3.700043190297207*^9, 
+   3.7000431910664587`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"PreScanDataNames", "=", 
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir", ",", 
+         "PrescanDataFileName"}], "}"}], "]"}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Importing", " ", "prescan", " ", "file", " ", "header"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PreScanData", "=", 
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir", ",", 
+         "PrescanDataFileName"}], "}"}], "]"}], "]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{"2", ";;"}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Importing", " ", "prescan", " ", "file", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.734925333175907*^9, 3.7349254665319295`*^9}, {
+   3.7349255215328617`*^9, 3.734925576785348*^9}, {3.734925620754326*^9, 
+   3.734925622691844*^9}, 3.734933147932666*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"PreScanFrequency", "=", 
+    RowBox[{"PreScanData", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", 
+       RowBox[{
+        RowBox[{"Position", "[", 
+         RowBox[{"PreScanDataNames", ",", "frequencyColumnName"}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Getting", " ", "frequency", " ", "column"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PreScanTheta", "=", 
+    RowBox[{"PreScanData", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", 
+       RowBox[{
+        RowBox[{"Position", "[", 
+         RowBox[{"PreScanDataNames", ",", "phaseColumnName"}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Getting", " ", "phase", " ", "column"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PreScanData", "=", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{"PreScanFrequency", ",", "PreScanTheta"}], "}"}], "]"}]}], 
+   ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Forming", " ", "prescan", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.734925547832569*^9, 3.734925551520117*^9}, {
+  3.7349256243155775`*^9, 3.734925625815573*^9}, {3.734933151542075*^9, 
+  3.734933152903287*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"PreScanLorenzFit", "=", 
+   RowBox[{"NonlinearModelFit", "[", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Fitting", " ", "prescan", " ", "data", " ", "with", " ", "lorenz"}], 
+     " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"PreScanData", ",", 
+     RowBox[{"lorenz", "[", 
+      RowBox[{"y0", ",", "A", ",", "\[Mu]", ",", " ", "\[Sigma]", ",", "x"}], 
+      "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"y0", ",", 
+         RowBox[{"Max", "[", "PreScanTheta", "]"}]}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"A", ",", 
+         RowBox[{
+          RowBox[{"Min", "[", "PreScanTheta", "]"}], "-", 
+          RowBox[{"Max", "[", "PreScanTheta", "]"}]}]}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"\[Mu]", ",", 
+         RowBox[{"PreScanFrequency", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{"Position", "[", 
+             RowBox[{"PreScanTheta", ",", 
+              RowBox[{"Min", "[", "PreScanTheta", "]"}]}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"1", ",", "1"}], "]"}], "]"}], "]"}], "]"}]}], "}"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"\[Sigma]", ",", "10"}], "}"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", "x"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"parametersTablePreScanLorenzFit", "=", 
+    RowBox[{"PreScanLorenzFit", "[", "\"\<ParameterTable\>\"", "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Getting", " ", "fited", " ", "parameters", " ", "and", " ", "their", " ", 
+    "errors"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"y0LorenzFit", "=", 
+   RowBox[{"parametersTablePreScanLorenzFit", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "2", ",", "2"}], "]"}], "]"}]}], ";", 
+  RowBox[{"\[Delta]y0LorenzFit", "=", 
+   RowBox[{"parametersTablePreScanLorenzFit", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "2", ",", "3"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ALorenzFit", "=", 
+   RowBox[{"parametersTablePreScanLorenzFit", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "3", ",", "2"}], "]"}], "]"}]}], ";", 
+  RowBox[{"\[Delta]ALorenzFit", "=", 
+   RowBox[{"parametersTablePreScanLorenzFit", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "3", ",", "3"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Mu]LorenzFit", "=", 
+   RowBox[{"parametersTablePreScanLorenzFit", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "4", ",", "2"}], "]"}], "]"}]}], ";", 
+  RowBox[{"\[Delta]\[Mu]LorenzFit", "=", 
+   RowBox[{"parametersTablePreScanLorenzFit", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "4", ",", "3"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Sigma]LorenzFit", "=", 
+   RowBox[{"parametersTablePreScanLorenzFit", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "5", ",", "2"}], "]"}], "]"}]}], ";", 
+  RowBox[{"\[Delta]\[Sigma]LorenzFit", "=", 
+   RowBox[{"parametersTablePreScanLorenzFit", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1", ",", "5", ",", "3"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PreScanFitPlot", "=", 
+   RowBox[{"Show", "[", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Plotting", " ", "round", " ", "data", " ", "and", " ", "fittings"}], 
+     " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"PreScanData", ",", 
+       RowBox[{"PlotLabel", "\[Rule]", "\"\<Phase fitting: Lorenz(Red)\>\""}],
+        ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Frequency[Hz]\>\"", ",", "\"\<Phase[Deg]\>\""}], 
+         "}"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"lorenz", "[", 
+        RowBox[{
+        "y0LorenzFit", ",", "ALorenzFit", ",", "\[Mu]LorenzFit", ",", " ", 
+         "\[Sigma]LorenzFit", ",", "x"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"Min", "[", "PreScanFrequency", "]"}], ",", 
+         RowBox[{"Max", "[", "PreScanFrequency", "]"}]}], "}"}], ",", 
+       RowBox[{"ColorFunction", "\[Rule]", 
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}], ",", "Red"}], "]"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+        "\"\<PreScan_DataFit.png\>\""}], "}"}], "]"}], ",", 
+     "PreScanFitPlot"}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "plot", " ", "from", " ", "above"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.734925711617623*^9, 3.7349257277885036`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"FastKineticDataNames", "=", 
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir", ",", 
+         "RoundDataFileName"}], "}"}], "]"}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Importing", " ", "fast", " ", "kinetics", " ", "file", " ", "header"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FastKineticsData", "=", 
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir", ",", 
+         "RoundDataFileName"}], "}"}], "]"}], "]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{"2", ";;"}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Importing", " ", "fast", " ", "kinetics", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FastKineticsTime", "=", 
+    RowBox[{"FastKineticsData", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", 
+       RowBox[{
+        RowBox[{"Position", "[", 
+         RowBox[{"FastKineticDataNames", ",", "timeRoundColumnName"}], "]"}], 
+        "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Getting", " ", "time", " ", "column"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FastKineticsTheta", "=", 
+    RowBox[{"FastKineticsData", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", 
+       RowBox[{
+        RowBox[{"Position", "[", 
+         RowBox[{"FastKineticDataNames", ",", "phaseColumnName"}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Getting", " ", "phase", " ", "column"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FastKineticsData", "=", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{"FastKineticsTime", ",", "FastKineticsTheta"}], "}"}], "]"}]}], 
+   ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Forming", " ", "fast", " ", "kinetics", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+        RowBox[{"\"\<FastKineticsData\>\"", " ", "<>", 
+         RowBox[{"ToString", "[", "1", "]"}], "<>", "\"\<_Raw.png\>\""}]}], 
+       "}"}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"FastKineticsData", ",", 
+       RowBox[{"PlotLabel", "\[Rule]", 
+        RowBox[{"\"\<FastKinetics Data\>\"", " ", "<>", 
+         RowBox[{"ToString", "[", "1", "]"}]}]}], ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Time[s]\>\"", ",", "\"\<Phase[deg]\>\""}], "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Just", " ", "to", " ", "be", " ", "shure", " ", "everything", " ", "goes",
+     " ", "well"}], " ", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.734931774641451*^9, 3.7349317756727085`*^9}, {
+  3.73493181424317*^9, 3.734931850841896*^9}, {3.7349318827177095`*^9, 
+  3.73493196707718*^9}, {3.734932016426049*^9, 3.7349320285719943`*^9}, {
+  3.7349328859849243`*^9, 3.7349329070664263`*^9}, {3.7349330936336727`*^9, 
+  3.734933109123035*^9}, {3.7349331569501953`*^9, 3.7349331974228296`*^9}, {
+  3.7349333135373597`*^9, 3.7349333372523327`*^9}, {3.734933369228066*^9, 
+  3.7349333695093193`*^9}, {3.73493342523954*^9, 3.7349334585323057`*^9}, {
+  3.7349337491855364`*^9, 3.7349337494199133`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"TimeMinTheta", "=", 
+    RowBox[{"FastKineticsTime", "[", 
+     RowBox[{"[", 
+      RowBox[{
+       RowBox[{"Position", "[", 
+        RowBox[{"FastKineticsTheta", ",", 
+         RowBox[{"Min", "[", "FastKineticsTheta", "]"}]}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1"}], "]"}], "]"}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Finding", " ", "phase", " ", "minimum"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Changing", " ", "parameters", " ", "for", " ", "better", " ", "fitting"}],
+    " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ALorenzFitFix", "=", 
+   RowBox[{
+    FractionBox["1", "2"], "\[Pi]", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Min", "[", "FastKineticsTheta", "]"}], "-", "y0LorenzFit"}], 
+     ")"}], " ", "\[Sigma]LorenzFit"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"y0LorenzFitFix", "=", 
+   RowBox[{
+    RowBox[{"Min", "[", "FastKineticsTheta", "]"}], "-", 
+    FractionBox[
+     RowBox[{"2", " ", "ALorenzFit"}], 
+     RowBox[{"\[Pi]", " ", "\[Sigma]LorenzFit"}]]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"parametersString", "=", 
+   RowBox[{
+   "\"\<Lorenz fitting ( y0 + 2A/Pi * \[Sigma]/(4 (x-\[Mu])^2+\[Sigma]^2) \
+):\>\"", "<>", "\"\<\\n\\t\>\"", "<>", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Forming", " ", "a", " ", "string", " ", "with", " ", "fited", " ", 
+      "parameters", " ", "and", " ", "their", " ", "errors"}], " ", "*)"}], 
+    "\[IndentingNewLine]", "\"\<y0 = \>\"", "<>", 
+    RowBox[{"ToString", "[", "y0LorenzFit", "]"}], "<>", 
+    "\"\< \[PlusMinus] \>\"", "<>", 
+    RowBox[{"ToString", "[", "\[Delta]y0LorenzFit", "]"}], "<>", 
+    "\"\<, t.m. \>\"", "<>", 
+    RowBox[{"ToString", "[", 
+     RowBox[{"100", "\[Times]", 
+      RowBox[{"Abs", "[", 
+       FractionBox["\[Delta]y0LorenzFit", "y0LorenzFit"], "]"}]}], "]"}], 
+    "<>", "\"\< %\>\"", "<>", "\"\<\\n\\t\>\"", "<>", "\[IndentingNewLine]", 
+    "\"\<A = \>\"", "<>", 
+    RowBox[{"ToString", "[", "ALorenzFit", "]"}], "<>", 
+    "\"\< \[PlusMinus] \>\"", "<>", 
+    RowBox[{"ToString", "[", "\[Delta]ALorenzFit", "]"}], "<>", 
+    "\"\<, t.m. \>\"", "<>", 
+    RowBox[{"ToString", "[", 
+     RowBox[{"100", "\[Times]", 
+      RowBox[{"Abs", "[", 
+       FractionBox["\[Delta]ALorenzFit", "ALorenzFit"], "]"}]}], "]"}], "<>", 
+    "\"\< %\>\"", "<>", "\"\<\\n\\t\>\"", "<>", "\[IndentingNewLine]", 
+    "\"\<\[Mu]/10^3 = \>\"", "<>", 
+    RowBox[{"ToString", "[", 
+     FractionBox["\[Mu]LorenzFit", 
+      SuperscriptBox["10", "3"]], "]"}], "<>", "\"\< \[PlusMinus] \>\"", "<>", 
+    RowBox[{"ToString", "[", "\[Delta]\[Mu]LorenzFit", "]"}], "<>", 
+    "\"\<, t.m. \>\"", "<>", 
+    RowBox[{"ToString", "[", 
+     RowBox[{"100", "\[Times]", 
+      RowBox[{"Abs", "[", 
+       FractionBox["\[Delta]\[Mu]LorenzFit", "\[Mu]LorenzFit"], "]"}], 
+      "\[Times]", 
+      SuperscriptBox["10", "3"]}], "]"}], "<>", "\"\<\[Times]10^(-3) %\>\"", 
+    "<>", "\"\<\\n\\t\>\"", "<>", "\[IndentingNewLine]", 
+    "\"\<\[Sigma] = \>\"", "<>", 
+    RowBox[{"ToString", "[", "\[Sigma]LorenzFit", "]"}], "<>", 
+    "\"\< \[PlusMinus] \>\"", "<>", 
+    RowBox[{"ToString", "[", "\[Delta]\[Sigma]LorenzFit", "]"}], "<>", 
+    "\"\<, t.m. \>\"", "<>", 
+    RowBox[{"ToString", "[", 
+     RowBox[{"100", "\[Times]", 
+      RowBox[{"Abs", "[", 
+       FractionBox["\[Delta]\[Sigma]LorenzFit", "\[Sigma]LorenzFit"], "]"}]}],
+      "]"}], "<>", "\"\< %\>\"", "<>", "\"\<\\n\>\"", "<>", 
+    "\[IndentingNewLine]", "\"\<y0Fix = \>\"", "<>", 
+    RowBox[{"ToString", "[", "y0LorenzFitFix", "]"}], "<>", "\"\<\\n\>\"", 
+    "<>", "\"\<AFix = \>\"", "<>", 
+    RowBox[{"ToString", "[", "ALorenzFitFix", "]"}], "<>", "\"\<\\n\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+        RowBox[{"\"\<FastKineticsData\>\"", "<>", 
+         RowBox[{"ToString", "[", "1", "]"}], "<>", "\"\<_Fit.txt\>\""}]}], 
+       "}"}], "]"}], ",", "parametersString"}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "string", " ", "from", " ", "above"}], " ", 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Forming", " ", "data", " ", "for", " ", "kinetics", " ", "fit"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TemperatureLorenzFromTimeRaw", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"FastKineticsTime", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", 
+       RowBox[{"lorenzInverse", "[", 
+        RowBox[{
+        "y0LorenzFit", ",", "ALorenzFit", ",", "\[Mu]LorenzFit", ",", " ", 
+         "\[Sigma]LorenzFit", ",", 
+         RowBox[{"FastKineticsTheta", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"FastKineticsTime", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], "+", "TimeMinTheta"}]}], 
+        "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "FastKineticsTime", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TemperatureLorenzFromTimeAFix", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"FastKineticsTime", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", 
+       RowBox[{"lorenzInverse", "[", 
+        RowBox[{
+        "y0LorenzFit", ",", "ALorenzFitFix", ",", "\[Mu]LorenzFit", ",", " ", 
+         "\[Sigma]LorenzFit", ",", 
+         RowBox[{"FastKineticsTheta", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"FastKineticsTime", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], "+", "TimeMinTheta"}]}], 
+        "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "FastKineticsTime", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TemperatureLorenzFromTimeY0Fix", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"FastKineticsTime", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", 
+        RowBox[{"lorenzInverse", "[", 
+         RowBox[{
+         "y0LorenzFitFix", ",", "ALorenzFit", ",", "\[Mu]LorenzFit", ",", " ",
+           "\[Sigma]LorenzFit", ",", 
+          RowBox[{"FastKineticsTheta", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"-", 
+            RowBox[{"FastKineticsTime", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "+", "TimeMinTheta"}]}], 
+         "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", "FastKineticsTime", "]"}]}], "}"}]}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Frequency", " ", "\[Rule]", " ", "\[CapitalDelta]Temperature"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TemperatureLorenzFromTimeRaw", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "2"}], "]"}], "]"}], "=", 
+   RowBox[{
+    FractionBox["1", "Kprt"], 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"TemperatureLorenzFromTimeRaw", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}], "-", 
+      RowBox[{"TemperatureLorenzFromTimeRaw", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "2"}], "]"}], "]"}]}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TemperatureLorenzFromTimeAFix", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "2"}], "]"}], "]"}], "=", 
+   RowBox[{
+    FractionBox["1", "Kprt"], 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"TemperatureLorenzFromTimeAFix", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}], "-", 
+      RowBox[{"TemperatureLorenzFromTimeAFix", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "2"}], "]"}], "]"}]}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TemperatureLorenzFromTimeY0Fix", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "2"}], "]"}], "]"}], "=", 
+   RowBox[{
+    FractionBox["1", "Kprt"], 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"TemperatureLorenzFromTimeY0Fix", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}], "-", 
+      RowBox[{"TemperatureLorenzFromTimeY0Fix", "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "2"}], "]"}], "]"}]}], ")"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.73492584833435*^9, 3.73492590220199*^9}, {
+   3.7349320654837446`*^9, 3.734932087256513*^9}, 3.7349324183215485`*^9, {
+   3.7349333402234583`*^9, 3.7349333495054703`*^9}, {3.7349333807981644`*^9, 
+   3.7349334006951523`*^9}, {3.7349334774166975`*^9, 3.734933481949872*^9}, 
+   3.7349339184350224`*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"TemperatureLorenzKineticsExport", "=", 
+    RowBox[{"Prepend", "[", 
+     RowBox[{
+      RowBox[{"Transpose", "[", 
+       RowBox[{"Join", "[", 
+        RowBox[{
+         RowBox[{"Transpose", "[", "TemperatureLorenzFromTimeRaw", "]"}], ",", 
+         RowBox[{"Transpose", "[", "TemperatureLorenzFromTimeAFix", "]"}], 
+         ",", 
+         RowBox[{"Transpose", "[", "TemperatureLorenzFromTimeY0Fix", "]"}]}], 
+        "]"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"\"\<Time[s] Lorenz \>\"", "<>", 
+         RowBox[{"ToString", "[", "1", "]"}], "<>", "\"\<, Raw\>\""}], ",", 
+        "\"\<\[CapitalDelta]Temperature[C], Raw\>\"", ",", 
+        RowBox[{"\"\<Time[s] Lorenz \>\"", "<>", 
+         RowBox[{"ToString", "[", "1", "]"}], "<>", "\"\<, Afix\>\""}], ",", 
+        "\"\<\[CapitalDelta]Temperature[C], Afix\>\"", ",", 
+        RowBox[{"\"\<Time[s] Lorenz \>\"", "<>", 
+         RowBox[{"ToString", "[", "1", "]"}], "<>", "\"\<, Y0fix\>\""}], ",", 
+        "\"\<\[CapitalDelta]Temperature[C], y0Fix\>\""}], "}"}]}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "calculated", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+        RowBox[{"\"\<FastKineticsKinetics\>\"", "<>", "\"\<.xlsx\>\""}]}], 
+       "}"}], "]"}], ",", "TemperatureLorenzKineticsExport"}], "]"}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Plotting", " ", "round", " ", "kinetics", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TemperatureLorenzKineticsPlotRound", "=", " ", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"Evaluate", "[", 
+      RowBox[{"{", 
+       RowBox[{
+       "TemperatureLorenzFromTimeRaw", ",", "TemperatureLorenzFromTimeAFix", 
+        ",", "TemperatureLorenzFromTimeY0Fix"}], "}"}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"PlotLabel", "\[Rule]", 
+      RowBox[{
+      "\"\<Lorenz Raw(Blue), AFix(Orange), \\nY0Fix(Green) phase fitting for \
+round \>\"", "<>", 
+       RowBox[{"ToString", "[", "1", "]"}]}]}], ",", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<Time[s]\>\"", ",", "\"\<\[CapitalDelta]Temperature[C]\>\""}], 
+       "}"}]}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+        RowBox[{"\"\<FastKineticsKineticsRound_\>\"", "<>", 
+         RowBox[{"ToString", "[", "1", "]"}], "<>", "\"\<.png\>\""}]}], "}"}],
+       "]"}], ",", "TemperatureLorenzKineticsPlotRound"}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "plot", " ", "from", " ", "above"}], " ", 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.734932147207702*^9, 3.73493222027209*^9}, {
+   3.734932335284968*^9, 3.7349323365974655`*^9}, 3.7349335027771473`*^9, {
+   3.7349344205033655`*^9, 3.7349344207221174`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Getting", " ", "plots", " ", "for", " ", "kinetics", " ", "and", " ", 
+    "exporting", " ", "them"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"TemperatureLorenzKineticsPlotAllRaw", "=", " ", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"TemperatureLorenzFromTimeRaw", ",", 
+       RowBox[{"PlotLabel", "\[Rule]", "\"\<Lorenz phase fitting Raw\>\""}], 
+       ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Time[s]\>\"", ",", "\"\<\[CapitalDelta]Temperature[C]\>\""}], 
+         "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"TemperatureLorenzKineticsPlotAllAFix", "=", " ", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"TemperatureLorenzFromTimeAFix", ",", 
+       RowBox[{"PlotLabel", "\[Rule]", "\"\<Lorenz phase fitting AFix\>\""}], 
+       ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Time[s]\>\"", ",", "\"\<\[CapitalDelta]Temperature[C]\>\""}], 
+         "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"TemperatureLorenzKineticsPlotAllY0Fix", "=", " ", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"TemperatureLorenzFromTimeY0Fix", ",", 
+       RowBox[{"PlotLabel", "\[Rule]", "\"\<Lorenz phase fitting Y0Fix\>\""}],
+        ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Time[s]\>\"", ",", "\"\<\[CapitalDelta]Temperature[C]\>\""}], 
+         "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+         RowBox[{"\"\<FastKineticsKineticsRaw\>\"", "<>", "\"\<.png\>\""}]}], 
+        "}"}], "]"}], ",", "TemperatureLorenzKineticsPlotAllRaw"}], "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+         RowBox[{"\"\<FastKineticsKineticsAFix\>\"", "<>", "\"\<.png\>\""}]}],
+         "}"}], "]"}], ",", "TemperatureLorenzKineticsPlotAllAFix"}], "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+         RowBox[{
+         "\"\<FastKineticsKineticsY0Fix\>\"", "<>", "\"\<.png\>\""}]}], "}"}],
+        "]"}], ",", "TemperatureLorenzKineticsPlotAllY0Fix"}], "]"}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.6985662698079786`*^9, 3.69856627990212*^9}, {
+   3.698566331034237*^9, 3.6985664510255003`*^9}, {3.698566635256441*^9, 
+   3.6985666566165295`*^9}, {3.6985681267076535`*^9, 3.69856813373962*^9}, {
+   3.6985737384148855`*^9, 3.6985737476323957`*^9}, {3.698573779107629*^9, 
+   3.698573813566472*^9}, {3.6985740580666656`*^9, 3.6985740610677967`*^9}, {
+   3.6985755976827483`*^9, 3.698575598210111*^9}, {3.698575703489475*^9, 
+   3.6985757147043967`*^9}, 3.699966662734715*^9, {3.700043298229521*^9, 
+   3.700043305439458*^9}, {3.7000437491470413`*^9, 3.7000437500628223`*^9}, {
+   3.7000445383812313`*^9, 3.7000445410464044`*^9}, {3.7000446654931493`*^9, 
+   3.7000447459068384`*^9}, {3.7002304609406047`*^9, 3.700230486372878*^9}, {
+   3.7002309478294897`*^9, 3.70023095960701*^9}, {3.7349325999723053`*^9, 
+   3.7349326187011023`*^9}, {3.7349335164490857`*^9, 3.7349335209327435`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"SlowKineticDataNames", "=", 
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir", ",", 
+         "KineticsDataFileName"}], "}"}], "]"}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Importing", " ", "slow", " ", "kinetics", " ", "file", " ", "header"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SlowKineticsData", "=", 
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir", ",", 
+         "KineticsDataFileName"}], "}"}], "]"}], "]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{"2", ";;"}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Importing", " ", "slow", " ", "kinetics", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SlowKineticsTime", "=", 
+    RowBox[{"SlowKineticsData", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", 
+       RowBox[{
+        RowBox[{"Position", "[", 
+         RowBox[{"SlowKineticDataNames", ",", "timeKineticsColumnName"}], 
+         "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Getting", " ", "time", " ", "column"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SlowKineticsFrequency", "=", 
+    RowBox[{"SlowKineticsData", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", 
+       RowBox[{
+        RowBox[{"Position", "[", 
+         RowBox[{"SlowKineticDataNames", ",", "frequencyColumnName"}], "]"}], 
+        "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Getting", " ", "frequency", " ", "column"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SlowKineticsData", "=", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{"SlowKineticsTime", ",", "SlowKineticsFrequency"}], "}"}], 
+     "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Forming", " ", "slow", " ", "kinetics", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+        RowBox[{"\"\<SlowKineticsData\>\"", " ", "<>", "\"\<_Raw.png\>\""}]}],
+        "}"}], "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"SlowKineticsData", ",", 
+       RowBox[{"PlotLabel", "\[Rule]", "\"\<SlowKinetics Data\>\""}], ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Time[s]\>\"", ",", "\"\<Frequency[Hz]\>\""}], "}"}]}], 
+       ",", 
+       RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Just", " ", "to", " ", "be", " ", "shure", " ", "everything", " ", "goes",
+     " ", "well"}], " ", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.7349335510062184`*^9, 3.7349336175777082`*^9}, {
+  3.7349336500418887`*^9, 3.734933774915861*^9}, {3.7349338382472944`*^9, 
+  3.734933839186001*^9}, {3.73493387156079*^9, 3.7349338974839306`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"StaringFrequency", "=", 
+    RowBox[{"PreScanFrequency", "[", 
+     RowBox[{"[", 
+      RowBox[{
+       RowBox[{"Position", "[", 
+        RowBox[{"PreScanTheta", ",", 
+         RowBox[{"Min", "[", "PreScanTheta", "]"}]}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "1"}], "]"}], "]"}], "]"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Frequency", " ", "before", " ", "kinetics"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TemperatureKineticsFromTime", "=", "SlowKineticsData"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Preparing", " ", "data"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"TemperatureKineticsFromTime", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "2"}], "]"}], "]"}], "=", 
+    RowBox[{
+     FractionBox["1", "Kprt"], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"TemperatureKineticsFromTime", "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "2"}], "]"}], "]"}], "-", "StaringFrequency"}], 
+      ")"}]}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Evaluating", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.734933925353362*^9, 3.734933974735405*^9}, {
+  3.7349341493283978`*^9, 3.734934184216385*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"TemperatureKineticsExport", "=", 
+    RowBox[{"Prepend", "[", 
+     RowBox[{
+      RowBox[{"Transpose", "[", 
+       RowBox[{"Join", "[", 
+        RowBox[{"Transpose", "[", "TemperatureKineticsFromTime", "]"}], "]"}],
+        "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<Time[s] Kinetics\>\"", ",", 
+        "\"\<\[CapitalDelta]Temperature[C]\>\""}], "}"}]}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Preparing", " ", "data", " ", "for", " ", "export"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+        RowBox[{"\"\<TemperatureKinetics\>\"", "<>", "\"\<.xlsx\>\""}]}], 
+       "}"}], "]"}], ",", "TemperatureKineticsExport"}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Exporting", " ", "calculated", " ", "data"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.734934435330039*^9, 3.7349345122013445`*^9}, {
+  3.7349345456716805`*^9, 3.7349345702190514`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"plt", "=", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "TemperatureLorenzFromTimeRaw", ",", "TemperatureLorenzFromTimeAFix", 
+       ",", "TemperatureLorenzFromTimeY0Fix", ",", 
+       "TemperatureKineticsFromTime"}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+     RowBox[{"PlotMarkers", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<*\>\"", ",", "\"\<*\>\"", ",", "\"\<*\>\"", ",", "\"\<\!\(\*
+StyleBox[\"*\",
+FontSize->18]\)\>\""}], "}"}]}], ",", 
+     RowBox[{"PlotLabel", "\[Rule]", "\"\<Red - Long\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"FileNameJoin", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+       "\"\<Kinetics.png\>\""}], "}"}], "]"}], ",", "plt"}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.7349339765635443`*^9, 3.7349340417201943`*^9}, {
+   3.7349342021468334`*^9, 3.734934205342224*^9}, {3.7349342857043505`*^9, 
+   3.734934340359498*^9}, {3.734935275869275*^9, 3.734935335131998*^9}, {
+   3.734935432380083*^9, 3.7349354479856577`*^9}, {3.734935549003154*^9, 
+   3.734935601997549*^9}, 3.734936928703158*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Temperature", "=", 
+   RowBox[{
+    RowBox[{"Import", "[", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "importDir", ",", 
+        "\"\<Temperature.dat\>\""}], "}"}], "]"}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"2", ";;"}], "]"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Temperature", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "2"}], "]"}], "]"}], "=", 
+   RowBox[{
+    RowBox[{"Temperature", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "2"}], "]"}], "]"}], "-", 
+    RowBox[{"Temperature", "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ",", "2"}], "]"}], "]"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"plt", "=", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "Temperature", ",", "TemperatureLorenzFromTimeRaw", ",", 
+       "TemperatureKineticsFromTime"}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+     RowBox[{"PlotMarkers", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<*\>\"", ",", "\"\<*\>\"", ",", "\"\<\!\(\*
+StyleBox[\"\[NeutralSmiley]\",
+FontSize->18]\)\>\""}], "}"}]}], ",", 
+     RowBox[{
+     "PlotLabel", "\[Rule]", 
+      "\"\<Blue - Temperature, Orange - Fast, Green - Slow\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"FileNameJoin", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+       "\"\<Temperatures.png\>\""}], "}"}], "]"}], ",", "plt"}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.7349345896065493`*^9, 3.7349346331611824`*^9}, 
+   3.734934879993955*^9, {3.734935352760931*^9, 3.7349354226804523`*^9}, {
+   3.73493545444639*^9, 3.7349354796790605`*^9}, {3.7349356067635612`*^9, 
+   3.7349356165876827`*^9}, 3.734936937679202*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TemperatureFunc", "=", 
+   RowBox[{"Interpolation", "[", 
+    RowBox[{"Temperature", ",", 
+     RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.7349348860436697`*^9, 3.7349349577042036`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Off", "[", 
+   RowBox[{"Power", "::", "infy"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"FastDelta", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"TemperatureLorenzFromTimeRaw", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{
+        FractionBox[
+         RowBox[{
+          RowBox[{"TemperatureLorenzFromTimeRaw", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "2"}], "]"}], "]"}], "-", 
+          RowBox[{"TemperatureFunc", "[", 
+           RowBox[{"TemperatureLorenzFromTimeRaw", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}]}], 
+         RowBox[{"TemperatureFunc", "[", 
+          RowBox[{"TemperatureLorenzFromTimeRaw", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}]], "\[Times]", 
+        "100"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "TemperatureLorenzFromTimeRaw", "]"}]}], 
+      "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SlowDelta", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"TemperatureKineticsFromTime", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{
+        FractionBox[
+         RowBox[{
+          RowBox[{"TemperatureKineticsFromTime", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "2"}], "]"}], "]"}], "-", 
+          RowBox[{"TemperatureFunc", "[", 
+           RowBox[{"TemperatureKineticsFromTime", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}]}], 
+         RowBox[{"TemperatureFunc", "[", 
+          RowBox[{"TemperatureKineticsFromTime", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}]], "\[Times]", 
+        "100"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "TemperatureKineticsFromTime", "]"}]}], "}"}]}],
+     "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.734934970606477*^9, 3.73493512829641*^9}, {
+  3.734935208128479*^9, 3.734935210615063*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"plt", "=", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"SlowDelta", ",", 
+      RowBox[{"FastDelta", "[", 
+       RowBox[{"[", 
+        RowBox[{"300", ";;"}], "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+    RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+    RowBox[{"PlotLabel", "\[Rule]", "\"\<Blue - Slow, Orange - Fast\>\""}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"FileNameJoin", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"NotebookDirectory", "[", " ", "]"}], ",", "exportDir", ",", 
+       "\"\<TemperaturesDelta.png\>\""}], "}"}], "]"}], ",", "plt"}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.7349351316623974`*^9, 3.7349351887063894`*^9}, {
+   3.7349354981198635`*^9, 3.7349355270943084`*^9}, {3.734935623078883*^9, 
+   3.734935633203633*^9}, 3.7349369444177246`*^9, {3.7349370413996973`*^9, 
+   3.7349370484407306`*^9}, {3.7349371871552105`*^9, 
+   3.7349371872958364`*^9}, {3.734937295552915*^9, 3.7349373062037425`*^9}, {
+   3.7349373624613705`*^9, 3.7349373676259975`*^9}, {3.7349374479771557`*^9, 
+   3.7349374675851955`*^9}, {3.7349375120257998`*^9, 3.734937513385191*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.011000000000000001`],
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAQBmIQDQRsjaEODl8Y6uxObzQ9AOTz6R5ycZjZLyC45KQq
+iF+XFePhsOjB+jt6acIgftMBLx+HFUcvrrjlzw/iZ+3RCXBIO9rAlK/OA+J/
+/qsS5LDrnPlCrhJWEL/1tWeIQ3B2xd5LnP/3A/mu2xaHORzoqrwnVgHmrzhW
+HOnQl1t1Z5cTWL8K28UYh4/r36zgmSUC4reLiSY4RIrnxmmvFQPx43b9TXQ4
+0pTrf6RVEsS/vjghxaHtvXNk9H05IL/hiIJCusOqHfPOaicqgviOCYVZDsv+
+OG/JF1EGqd/lKZPv8LTiAsumJSD/HfgeHFnksOejiNYRaTUg32Hb5/dlDtKF
+HU8jX6uD5Mv2ba1weLurKnPNRaUDAK5MevM=
+      "]]}, 
+    {RGBColor[0.880722, 0.611041, 0.142051], PointSize[0.011000000000000001`],
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJwlkX0s1HEcxy+28lB28lDHhRNXapdZScjv+/657Hogw6g1W02sI61Uk+xS
+ikktUmo9ULscKqOYdBXdV5FDSqdUf/Sg1DGsrHR6QL/f+Wyfff/5vPZ9fd4f
+ScLu6CQLgUDgyzX/5jm/fWaKYaC08VEW/JLQg4NSP6tUBh9re0or2sTUTlZX
++i2PwcDx1Xeql7ToNHtCbF6XMRicO9vrV4mYnpefTDU+YHBCl764LkNMmzvU
+YQ09DOK6xx13TFlQjq58MsTg/Zt80fIIL7q2L9OxZhaBu9OKs6GiKd07r5nZ
+5xYShPQfW9ZRK0JgvT79ISH4rpRH2ondaGLwh8hTmwjcnC5FVZRb0z9ZKY37
+9xGMG2MiXz5dRON4wUIC+Zrh3TUaTzocpXXLrSLo8hbeKlnpSufx6z0mMBlY
+k3+QO92nLBpRfSBIyVYETvUuolc4vQ0mguAzE7Y3ioSY9gNEyRr4qS2p2c8B
+qKwSDI+rnemli1wFAk3/NG3x64Km/RTAo7Imo3D1MurLA7FA9GRS1oVdDtO+
+2wFZ8X37w5nzcf3JhoD8NEDaXN541+AOPs09h4B2O4+GxFIpwgPy2W3nAG3w
+c4tOByFaPW7vVaoBvcruaNppMTXPVwNjR4RDKYwV7YlIEG6+x/GWQf6FQVJq
+5lsBW+texXptP+HXUbwAWh63jbxJltEtvPA7wGfVe2XuzZ/EzA9yvhLJV9WU
+DeXjIWNAV0Krd+wsETXzM1i0RGdtHugd0B14eNXFdw6LhQsKRP9UkzpvLh65
+K4vU/GBZGuNAv3NxBviwWFIS31epd6K5Q9xB/FmMVRYZOsdc6XK+5Cwiu7WX
+f7u8IpMvMwalUSyMhn6perSXtKdzH2xlMapVZwpj3Wjoti/dnjtZ5Hza7iio
+n0FnWyzNcz7IQmypatJ02FMujRCbPBYFWXU5pvA59FpYw4+JYhZEvzGR+vzV
+Gf/eGDWUsqiXeIaOfran/wGVll3Y
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{24.62439062550664, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  ImageSize->Large,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotLabel->FormBox["\"Blue - Slow, Orange - Fast\"", TraditionalForm],
+  PlotRange->{{30.328, 395.3589999675751}, {-26.28657195833215, 
+   11.307408992207813`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.7349370595342903`*^9, 3.734937187748971*^9, 3.734937254700346*^9, {
+   3.7349372855275955`*^9, 3.7349373064693546`*^9}, {3.734937358800316*^9, 
+   3.7349373678916135`*^9}, {3.734937443618871*^9, 3.734937468053951*^9}, {
+   3.7349375027031317`*^9, 3.7349375137289443`*^9}, 3.7349375736340747`*^9}]
+}, Open  ]]
+},
+WindowSize->{1366, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+Magnification:>1.1 Inherited,
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 553, 12, 93, "Text"],
+Cell[1114, 34, 1115, 26, 138, "Input"],
+Cell[2232, 62, 821, 16, 33, "Input"],
+Cell[3056, 80, 579, 14, 56, "Input"],
+Cell[3638, 96, 2162, 53, 188, "Input"],
+Cell[5803, 151, 2779, 70, 177, "Input"],
+Cell[8585, 223, 1224, 32, 116, "Input"],
+Cell[9812, 257, 1454, 41, 157, "Input"],
+Cell[11269, 300, 5226, 134, 601, "Input"],
+Cell[16498, 436, 3982, 102, 321, "Input"],
+Cell[20483, 540, 9107, 233, 1144, "Input"],
+Cell[29593, 775, 3400, 82, 428, "Input"],
+Cell[32996, 859, 4066, 91, 402, "Input"],
+Cell[37065, 952, 3547, 96, 321, "Input"],
+Cell[40615, 1050, 1337, 38, 159, "Input"],
+Cell[41955, 1090, 1182, 31, 138, "Input"],
+Cell[43140, 1123, 1347, 33, 134, "Input"],
+Cell[44490, 1158, 1975, 55, 216, "Input"],
+Cell[46468, 1215, 279, 7, 52, "Input"],
+Cell[46750, 1224, 2275, 61, 281, "Input"],
+Cell[CellGroupData[{
+Cell[49050, 1289, 1260, 28, 93, "Input"],
+Cell[50313, 1319, 3366, 68, 411, "Output"]
+}, Open  ]]
+}
+]
+*)
+

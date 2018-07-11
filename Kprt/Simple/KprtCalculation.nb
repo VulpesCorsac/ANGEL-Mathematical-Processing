@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     40293,        952]
-NotebookOptionsPosition[     39473,        921]
-NotebookOutlinePosition[     39816,        936]
-CellTagsIndexPosition[     39773,        933]
+NotebookDataLength[     41141,        966]
+NotebookOptionsPosition[     40319,        935]
+NotebookOutlinePosition[     40662,        950]
+CellTagsIndexPosition[     40619,        947]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -21,12 +21,13 @@ Notebook[{
 Cell["\<\
 This script is a part of ANGEL project.
 V 1.3
-2017.10.01
+2018.11.05
 (C) Vulpes Corsac\
 \>", "Text",
  CellChangeTimes->{{3.698631723375579*^9, 3.698631756693108*^9}, {
   3.7077249871839614`*^9, 3.707724987399116*^9}, {3.715512434216916*^9, 
-  3.7155124342669506`*^9}, {3.715844788124086*^9, 3.7158447924731607`*^9}}],
+  3.7155124342669506`*^9}, {3.715844788124086*^9, 3.7158447924731607`*^9}, {
+  3.7350182473605995`*^9, 3.7350182511459293`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -81,7 +82,8 @@ Cell[BoxData[{
    "Name", " ", "of", " ", "column", " ", "in", " ", "data", " ", "file", " ",
      "with", " ", "phase"}], " ", "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"frequencyColumnName", "=", "\"\<Fext\>\""}], ";", 
+  RowBox[{
+   RowBox[{"frequencyColumnName", "=", "\"\<Fext\>\""}], ";"}], 
   RowBox[{"(*", " ", 
    RowBox[{
    "Name", " ", "of", " ", "column", " ", "in", " ", "data", " ", "file", " ",
@@ -514,7 +516,7 @@ Cell[BoxData[
        Offset[0.2]}, "RowsIndexed" -> {}}],
   Function[BoxForm`e$, 
    TableForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.715512879111763*^9}]
+ CellChangeTimes->{3.715512879111763*^9, 3.735018236794896*^9}]
 }, Open  ]],
 
 Cell[BoxData[{
@@ -693,9 +695,17 @@ Cell[BoxData[{
       RowBox[{"Joined", "->", "False"}], ",", 
       RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
       RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
-      RowBox[{
-      "PlotLabel", "\[Rule]", "\"\<Fresonance temperature dependency\>\""}], 
-      ",", 
+      RowBox[{"PlotLabel", "\[Rule]", 
+       RowBox[{
+       "\"\<Fresonance temperature dependency\>\"", "<>", "\"\<\\n\>\"", 
+        "<>", "\"\<\!\(\*SuperscriptBox[\(K\), \(prt\)]\) = \>\"", "<>", 
+        RowBox[{"ToString", "[", "Kprt", "]"}], "<>", 
+        "\"\< \[PlusMinus] \>\"", "<>", " ", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"100", "\[Times]", 
+          RowBox[{"Abs", "[", 
+           FractionBox["\[Delta]Kprt", "Kprt"], "]"}]}], "]"}], " ", "<>", 
+        "\"\< %\>\""}]}], ",", 
       RowBox[{"AxesLabel", "\[Rule]", 
        RowBox[{"{", 
         RowBox[{"\"\<Temperature[C]\>\"", ",", "\"\<Fresonance[Hz]\>\""}], 
@@ -723,16 +733,15 @@ Cell[BoxData[{
           RowBox[{"x", ",", "y"}], "}"}], ",", "Red"}], "]"}]}]}], "]"}]}], 
    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{
-   RowBox[{"Export", "[", 
+  RowBox[{"Export", "[", 
+   RowBox[{
     RowBox[{
-     RowBox[{
-      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
-      "\"\<FresFromTemperature.png\>\""}], ",", "plotFresFromTemperature"}], 
-    "]"}], ";"}], 
+     RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
+     "\"\<FresFromTemperature.png\>\""}], ",", "plotFresFromTemperature"}], 
+   "]"}], ";", 
   RowBox[{"(*", " ", 
-   RowBox[{"Exporting", " ", "plot", " ", "from", " ", "above"}], " ", 
-   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+   RowBox[{"Exporting", " ", "plot", " ", "from", " ", "above"}], " ", "*)"}],
+   "\[IndentingNewLine]"}]}], "Input",
  CellChangeTimes->{{3.687769575487048*^9, 3.687769575946816*^9}, {
    3.6877696146495423`*^9, 3.6877696416534977`*^9}, {3.6877696796917014`*^9, 
    3.6877697041307983`*^9}, 3.687769757892004*^9, 3.6877705155761595`*^9, {
@@ -744,7 +753,8 @@ Cell[BoxData[{
    3.698389546485818*^9}, {3.698389592663436*^9, 3.698389611497739*^9}, {
    3.698390323031203*^9, 3.69839037285892*^9}, {3.7003188300796003`*^9, 
    3.7003188327069387`*^9}, {3.70031887395357*^9, 3.700318947135375*^9}, {
-   3.700318994293226*^9, 3.7003190738498225`*^9}}],
+   3.700318994293226*^9, 3.7003190738498225`*^9}, {3.7350182045515027`*^9, 
+   3.7350182313123474`*^9}, {3.7350183073554387`*^9, 3.7350183703487835`*^9}}],
 
 Cell[BoxData[
  GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
@@ -827,7 +837,9 @@ vuJyke4P40pGZ3FeYac4BvS8Os809J+MIfDlEr+e7pfUqL39YwlE3Wgypa3p
          Part[#, 1]], 
         (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
          Part[#, 2]]}& )}},
-  PlotLabel->FormBox["\"Fresonance temperature dependency\"", TraditionalForm],
+  PlotLabel->FormBox[
+   "\"Fresonance temperature dependency\\n\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(prt\\)]\\) = -29.8696 \[PlusMinus] 5.96647 %\"", TraditionalForm],
   PlotRange->{{20.47, 28.4}, {580183.0114001239, 580419.}},
   PlotRangeClipping->True,
   PlotRangePadding->{{
@@ -842,7 +854,9 @@ vuJyke4P40pGZ3FeYac4BvS8Os809J+MIfDlEr+e7pfUqL39YwlE3Wgypa3p
    3.6983902445087442`*^9, 3.698390271639902*^9}, 3.698390331885456*^9, {
    3.698390365128461*^9, 3.698390373334256*^9}, 3.7003190414428596`*^9, {
    3.700319074318565*^9, 3.7003190930841713`*^9}, 3.700319433626264*^9, 
-   3.7155125365897713`*^9, 3.7155128826882906`*^9}]
+   3.7155125365897713`*^9, 3.7155128826882906`*^9, {3.735018233046733*^9, 
+   3.73501824024197*^9}, {3.735018308027308*^9, 3.7350183223257694`*^9}, {
+   3.7350183656732807`*^9, 3.7350183708331532`*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -916,7 +930,7 @@ Cell[BoxData["\<\"Kprt[Hz/K] = -29.8696 \[PlusMinus] 1.78216, t.m. 5.96647 \
    3.6983899371792974`*^9, 3.6983900455069103`*^9, 3.6983901792934113`*^9, {
    3.698390217099377*^9, 3.6983902719571266`*^9}, 3.6983903321146193`*^9, 
    3.7003190932247972`*^9, 3.700319433839405*^9, 3.7155125367578907`*^9, 
-   3.715512882835395*^9}]
+   3.715512882835395*^9, 3.7350182404138346`*^9}]
 }, Open  ]]
 },
 WindowSize->{1366, 685},
@@ -935,24 +949,24 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 314, 8, 87, "Text"],
-Cell[875, 30, 226, 6, 47, "Input"],
-Cell[1104, 38, 238, 5, 30, "Input"],
-Cell[1345, 45, 947, 27, 50, "Input"],
-Cell[2295, 74, 650, 15, 50, "Input"],
-Cell[2948, 91, 465, 12, 41, "Input"],
+Cell[558, 20, 367, 9, 87, "Text"],
+Cell[928, 31, 226, 6, 47, "Input"],
+Cell[1157, 39, 238, 5, 30, "Input"],
+Cell[1398, 46, 947, 27, 50, "Input"],
+Cell[2348, 75, 664, 16, 50, "Input"],
+Cell[3015, 93, 465, 12, 41, "Input"],
 Cell[CellGroupData[{
-Cell[3438, 107, 16779, 374, 1394, "Input"],
-Cell[20220, 483, 1410, 33, 97, "Output"]
+Cell[3505, 109, 16779, 374, 1394, "Input"],
+Cell[20287, 485, 1432, 33, 111, "Output"]
 }, Open  ]],
-Cell[21645, 519, 5368, 135, 440, "Input"],
+Cell[21734, 521, 5368, 135, 440, "Input"],
 Cell[CellGroupData[{
-Cell[27038, 658, 3880, 88, 384, "Input"],
-Cell[30921, 748, 4933, 96, 345, "Output"]
+Cell[27127, 660, 4373, 96, 515, "Input"],
+Cell[31503, 758, 5173, 100, 367, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[35891, 849, 2766, 56, 295, "Input"],
-Cell[38660, 907, 797, 11, 88, "Output"]
+Cell[36713, 863, 2766, 56, 295, "Input"],
+Cell[39482, 921, 821, 11, 88, "Output"]
 }, Open  ]]
 }
 ]
